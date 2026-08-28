@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100">
+  <g>
+    <rect x="5" y="5" width="90" height="90" style="fill: #fff;"/>
+    <path d="M90,10v80H10V10h80M100,0H0v100h100V0h0Z" style="fill: #7896b3;"/>
+  </g>
+  <line x1="9.59" y1="48" x2="90" y2="48" style="fill: none; stroke: #09f; stroke-miterlimit: 10; stroke-width: 10px;"/>
+  <g>
+    <path d="M50,35C30.7,35,15,19.3,15,0s15.7-35,35-35S85-19.3,85,0s-15.7,35-35,35Z" style="fill: #09f;"/>
+    <path d="M50-30c16.54,0,30,13.46,30,30s-13.46,30-30,30S20,16.54,20,0s13.46-30,30-30M50-40C27.91-40,10-22.09,10,0s17.91,40,40,40S90,22.09,90,0s-17.91-40-40-40h0Z" style="fill: #006ed3;"/>
+  </g>
+  <line x1="50" y1="90" y2="40" style="fill: none; stroke: #006ed3; stroke-miterlimit: 10; stroke-width: 10px;"/>
+  <line x1="50" y1="90" x2="100" y2="40" style="fill: none; stroke: #006ed3; stroke-miterlimit: 10; stroke-width: 10px;"/>
+  <path d="M90,10v80H10V10h80M100,0H0v100h100V0h0Z" style="fill: #006ed3;"/>
+</svg>
