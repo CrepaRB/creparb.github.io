@@ -104,7 +104,6 @@
             --pause-background-color: var(--dark-pause-background-color);
         }
 
-        /* 基础样式重置。 */
         *,
         *::before,
         *::after {
@@ -128,7 +127,6 @@
             transition: color 0.3s ease, background-color 0.3s ease;
         }
 
-        /* 固定背景层不参与页面布局。 */
         .background-layer {
             position: fixed;
             inset: 0;
@@ -143,7 +141,6 @@
             pointer-events: auto;
         }
 
-        /* 深度线框随滚动产生视差位移。 */
         .wire-layer {
             position: absolute;
             top: 0;
@@ -170,7 +167,6 @@
             stroke-linejoin: round;
         }
 
-        /* 由 SVG mask 限定范围的环形模糊层。 */
         .ring-overlay {
             position: fixed;
             inset: 0;
@@ -185,7 +181,6 @@
             mask-repeat: no-repeat;
         }
 
-        /* 环形描边层，与模糊层共享几何参数。 */
         .ring-stroke {
             position: absolute;
             inset: 0;
@@ -212,7 +207,6 @@
                 0 16px 12px -8px rgba(0, 0, 0, 0.6);
         }
 
-        /* 装饰直线 */
         .decoration-line {
             transition: none;
             opacity: 0;
@@ -226,7 +220,6 @@
                 0 16px 12px -8px rgba(0, 0, 0, 0.6);
         }
 
-        /* 暂停渲染时覆盖页面内容的过渡遮罩。 */
         .pause-screen {
             position: fixed;
             inset: 0;
@@ -258,7 +251,6 @@
             pointer-events: none;
         }
 
-        /* 页面内容层。 */
         .page-wrapper {
             top: 100vh;
             position: relative;
@@ -272,7 +264,6 @@
             border-top:1px rgba(0, 0, 0, 0.1) solid;
         }
 
-        /* 首屏装饰区域。 */
         .hero {
             display: flex;
             flex-direction: column;
@@ -329,7 +320,6 @@
             transition: -webkit-text-stroke-color 0.3s ease;
         }
 
-        /* 顶栏从首屏下方进入文档流，滚动到顶部后固定。 */
         .top-bar {
             position: sticky;
             top: 0;
@@ -394,7 +384,6 @@
             outline-offset: 2px;
         }
 
-        /* 两段文字共享定位上下文，副标题贴在主标题右侧。 */
         .top-bar-title-group {
             display: flex;
             align-items: flex-end;
@@ -438,7 +427,6 @@
             color: var(--color-text-secondary);
         }
 
-        /* 随标题组移动的遮挡渐变。 */
         .top-bar-barrier {
             position: absolute;
             top: 0;
@@ -457,7 +445,6 @@
 
         .footer { width: 100%; font-size: 0.6em; background-color: #00000000; padding: 10px; text-align: center; color: #6c757d; }
 
-        /* 简历内容区域。 */
         .content {
             flex: 1;
             padding: var(--space-xl) var(--space-lg);
@@ -629,8 +616,6 @@
         #mainContent .tool-tag i { font-size: 0.9rem; color: var(--content-strong-color); width: 1.1em; text-align: center; }
         #mainContent .tool-tag:hover { background-color: var(--content-card-bg-light); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); border-color: var(--content-strong-color); }
         #mainContent .tool-tag:hover i { color: var(--color-text-primary); }
-
-        /* 响应式布局。 */
         @media (min-width: 769px) {
             #mainContent .capacity-list { display: flex; gap: 16px; overflow-x: auto; }
             #mainContent .capacity-card { flex: 0 0 260px; }
