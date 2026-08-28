@@ -10,7 +10,7 @@
     <meta name="description" content="一份简历，属于网名岑鸽的人类。">
     <link rel="icon"
         href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDEwMCAxMDAiPgogIDxnPgogICAgPHJlY3QgeD0iNSIgeT0iNSIgd2lkdGg9IjkwIiBoZWlnaHQ9IjkwIiBzdHlsZT0iZmlsbDogI2ZmZjsiLz4KICAgIDxwYXRoIGQ9Ik05MCwxMHY4MEgxMFYxMGg4ME0xMDAsMEgwdjEwMGgxMDBWMGgwWiIgc3R5bGU9ImZpbGw6ICM3ODk2YjM7Ii8+CiAgPC9nPgogIDxsaW5lIHgxPSIxMCIgeTE9IjcwIiB4Mj0iOTAiIHkyPSI3MCIgc3R5bGU9ImZpbGw6IG5vbmU7IHN0cm9rZTogIzA5Zjsgc3Ryb2tlLW1pdGVybGltaXQ6IDEwOyBzdHJva2Utd2lkdGg6IDEwcHg7Ii8+CiAgPGc+CiAgICA8cGF0aCBkPSJNNTAsMzVDMzAuNywzNSwxNSwxOS4zLDE1LDBzMTUuNy0zNSwzNS0zNVM4NS0xOS4zLDg1LDBzLTE1LjcsMzUtMzUsMzVaIiBzdHlsZT0iZmlsbDogIzA5ZjsiLz4KICAgIDxwYXRoIGQ9Ik01MC0zMGMxNi41NCwwLDMwLDEzLjQ2LDMwLDMwcy0xMy40NiwzMC0zMCwzMFMyMCwxNi41NCwyMCwwczEzLjQ2LTMwLDMwLTMwTTUwLTQwQzI3LjkxLTQwLDEwLTIyLjA5LDEwLDBzMTcuOTEsNDAsNDAsNDBTOTAsMjIuMDksOTAsMHMtMTcuOTEtNDAtNDAtNDBoMFoiIHN0eWxlPSJmaWxsOiAjMDA2ZWQzOyIvPgogIDwvZz4KICA8bGluZSB4MT0iNTAiIHkxPSI5MCIgeTI9IjQwIiBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlOiAjMDA2ZWQzOyBzdHJva2UtbWl0ZXJsaW1pdDogMTA7IHN0cm9rZS13aWR0aDogMTBweDsiLz4KICA8bGluZSB4MT0iNTAiIHkxPSI5MCIgeDI9IjEwMCIgeTI9IjQwIiBzdHlsZT0iZmlsbDogbm9uZTsgc3Ryb2tlOiAjMDA2ZWQzOyBzdHJva2UtbWl0ZXJsaW1pdDogMTA7IHN0cm9rZS13aWR0aDogMTBweDsiLz4KICA8cGF0aCBkPSJNOTAsMTB2ODBIMTBWMTBoODBNMTAwLDBIMHYxMDBoMTAwVjBoMFoiIHN0eWxlPSJmaWxsOiAjMDA2ZWQzOyIvPgo8L3N2Zz4=">
-    <title>何人的简历</title>
+    <title>About 岑鸽</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -841,12 +841,9 @@
 
 <body>
 
-    <!-- 固定背景：深度线框、环形效果和首屏装饰。 -->
     <div class="background-layer" id="backgroundLayer" aria-hidden="true">
-        <!-- 动态生成的深度线框挂载点。 -->
         <div id="wire-layer" class="wire-layer"></div>
 
-        <!-- 环形模糊层使用的 SVG 遮罩。 -->
         <svg width="0" height="0" style="position: absolute;">
             <defs>
                 <mask id="ring-mask">
@@ -857,10 +854,8 @@
             </defs>
         </svg>
 
-        <!-- 由 SVG 遮罩限定范围的环形模糊。 -->
         <div class="ring-overlay" role="presentation"></div>
 
-        <!-- 与模糊层共享几何参数的环形描边+直线装饰。 -->
         <div class="ring-stroke">
             <svg id="ring-stroke-svg" width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="none">
                 <circle id="ring-stroke-circle" cx="0" cy="0" r="0" fill="none" stroke="var(--ring-stroke-color)"
@@ -876,7 +871,6 @@
             </svg>
         </div>
 
-        <!-- 由 JavaScript 克隆并定位到各深度层的模板。 -->
         <template id="wire-template">
             <svg class="depth-wire-frame" viewBox="0 0 875 875">
                 <rect class="st0" x="0" y="0" width="875" height="875"></rect>
@@ -891,7 +885,6 @@
             </svg>
         </template>
 
-        <!-- 首屏装饰。 -->
         <section class="hero" id="hero">
             <div class="hero-title"><i class="fa-solid fa-arrow-up-long"></i></div>
             <div class="hero-decoration" aria-hidden="true">
@@ -900,23 +893,18 @@
         </section>
     </div>
 
-    <!-- 窗口尺寸变化时暂停渲染的过渡遮罩。 -->
     <div id="pause-screen" class="pause-screen" hidden aria-live="polite">
         <div><i class="fa-solid fa-hourglass"></i>
             <p style="display:inline">等待页面稳定</p>
         </div>
     </div>
 
-    <!-- 页面内容层，位于固定背景之上。 -->
     <div class="page-wrapper">
 
-        <!-- 滚动后固定的顶栏。 -->
         <header class="top-bar" id="topBar">
             <div class="top-bar-inner">
                 <div class="top-bar-title-group" id="topBarTitleGroup">
-                    <!-- 主标题由 JS 缩放，标题组负责整体移动。 -->
                     <span class="top-bar-text top-bar-text-primary" id="textPrimary">About 岑鸽&nbsp;</span>
-                    <!-- 始终贴在主标题右侧的副标题。 -->
                     <pre class="top-bar-text top-bar-text-secondary" id="textSecondary">（当然不是本名）</pre>
                 </div>
                 <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换到夜间模式" aria-pressed="false">
@@ -926,7 +914,6 @@
             </div>
         </header>
 
-        <!-- 简历正文。 -->
         <main class="content" id="mainContent">
             <noscript>
                 <br />
@@ -1068,12 +1055,9 @@
 
     </div>
 
-    <!-- 背景和布局脚本按依赖顺序加载。 -->
     <script>
         (function () {
             'use strict';
-
-            // 统一管理主题、布局更新器和尺寸变化时的短暂暂停。
 
             let pagePaused = false;
             let pauseTimer = null;
@@ -1121,7 +1105,6 @@
                 }
             };
 
-            // 尺寸变化期间暂停布局更新，稳定后统一刷新并关闭遮罩。
             window.__pageLayout.pause = function pausePage(duration) {
                 const pauseScreen = document.getElementById('pause-screen');
                 const shouldAnimate = pauseScreen.hidden && !pauseScreen.classList.contains('is-closing');
@@ -1160,8 +1143,6 @@
     <script>
         (function () {
             'use strict';
-
-            // 生成分层线框，并在滚动和尺寸变化时更新其视差位置。
 
             const wireRegistry = {
                 'elements-mobile': [
@@ -1205,7 +1186,6 @@
                 const repeatGap = layout === 'pc' ? getCssNumber('--wire-pc-repeat-gap') / 100 : 0;
                 const result = [];
 
-                // 每一层复用同一组线框，通过 y 偏移形成纵深。
                 for (let layer = 0; layer < count; layer += 1) {
                     source.forEach(function (item) {
                         result.push({
@@ -1260,7 +1240,6 @@
                     const perspectiveCoefficient = 0.12;
                     const perspectiveScale = 1 / (1 + motionDepth * perspectiveCoefficient);
                     const maxDepthScale = 1 / (1 + maxDepth * perspectiveCoefficient);
-                    // 将不同深度映射到统一的入场位移范围。
                     return (perspectiveScale - maxDepthScale) / (1 - maxDepthScale);
                 }
 
@@ -1393,7 +1372,6 @@
             const ringLayer = doc.querySelector('.wire-layer');
             let topBarIsFixed = false;
 
-            // 直接获取 HTML 中预置的线条
             const lineLeft = doc.getElementById('line-left');
             const lineRight = doc.getElementById('line-right');
             const sublineLeft = doc.getElementById('subline-left');
@@ -1421,7 +1399,6 @@
                 return Math.min(mobileRadius, viewportHeight * 3 / 5);
             }
 
-            // 计算圆外一点到圆的两条切点
             function getTangentPoints(cx, cy, r, px, py) {
                 const dx = px - cx;
                 const dy = py - cy;
@@ -1437,11 +1414,9 @@
                 };
             }
 
-            // 更新四条直线的位置
             function updateLines(isFixed, vw, vh, cx, cy, radius) {
                 if (!lineLeft || !lineRight || !sublineLeft || !sublineRight) return;
 
-                // 读取所有必要变量
                 const color = getCssValue('--decoration-line-color');
                 const stroke = getCssValue('--decoration-line-stroke');
                 const focusHeightRaw = getCssValue('--decoration-line-focus-height');
@@ -1449,13 +1424,11 @@
 
                 const allVarsExist = color && stroke && focusHeightRaw && subHeightRaw;
                 const focusHeight = allVarsExist ? toPixels(focusHeightRaw) : 0;
-                const subHeight = allVarsExist ? toPixels(subHeightRaw) : 0; // 单位 vw，自动转换
+                const subHeight = allVarsExist ? toPixels(subHeightRaw) : 0;
                 const valid = allVarsExist && focusHeight > 0 && subHeight >= 0;
 
-                // 若变量无效，不更新坐标（保留上次位置）
                 if (!valid) return;
 
-                // ---- 计算主直线 ----
                 const O = { x: vw / 2, y: vh - focusHeight };
                 const tangents = getTangentPoints(cx, cy, radius, O.x, O.y);
                 if (!tangents) return;
@@ -1474,13 +1447,11 @@
                 const uL = { x: dxL / lenL, y: dyL / lenL };
                 const uR = { x: dxR / lenR, y: dyR / lenR };
 
-                // 主直线端点
                 const pL1 = { x: O.x - uL.x * halfLen, y: O.y - uL.y * halfLen };
                 const pL2 = { x: O.x + uL.x * halfLen, y: O.y + uL.y * halfLen };
                 const pR1 = { x: O.x - uR.x * halfLen, y: O.y - uR.y * halfLen };
                 const pR2 = { x: O.x + uR.x * halfLen, y: O.y + uR.y * halfLen };
 
-                // 更新坐标
                 lineLeft.setAttribute('x1', pL1.x);
                 lineLeft.setAttribute('y1', pL1.y);
                 lineLeft.setAttribute('x2', pL2.x);
@@ -1491,8 +1462,6 @@
                 lineRight.setAttribute('x2', pR2.x);
                 lineRight.setAttribute('y2', pR2.y);
 
-                // ---- 计算辅助线 ----
-                // 主直线与底边 y=vh 的交点
                 const t_bottom_L = (vh - O.y) / uL.y;
                 const x_bottom_L = O.x + uL.x * t_bottom_L;
                 const pBottomL = { x: x_bottom_L, y: vh };
@@ -1501,23 +1470,19 @@
                 const x_bottom_R = O.x + uR.x * t_bottom_R;
                 const pBottomR = { x: x_bottom_R, y: vh };
 
-                // 辅助线终点：在侧边上，到底角距离为 subHeight（竖直距离）
-                const endY = vh - subHeight; // subHeight 已转为像素
+                const endY = vh - subHeight;
 
-                // 左侧辅助线：从底边交点向左上至 (0, endY)
                 sublineLeft.setAttribute('x1', pBottomL.x);
                 sublineLeft.setAttribute('y1', pBottomL.y);
                 sublineLeft.setAttribute('x2', vw);
                 sublineLeft.setAttribute('y2', endY);
 
-                // 右侧辅助线：从底边交点向右上至 (vw, endY)
                 sublineRight.setAttribute('x1', pBottomR.x);
                 sublineRight.setAttribute('y1', pBottomR.y);
                 sublineRight.setAttribute('x2', 0);
                 sublineRight.setAttribute('y2', endY);
             }
 
-            // 原有的 updateRing 保持不变
             function updateRing() {
                 if (!maskCircle || !maskRect || !strokeSvg || !strokeCircle) return;
 
@@ -1551,7 +1516,6 @@
                 strokeCircle.setAttribute('r', topBarIsFixed ? getFinalRadius(viewportWidth, viewportHeight) : radius);
                 strokeCircle.style.opacity = topBarIsFixed ? 1 : 1 - Math.pow(transitionProgress, 3);
 
-                // 更新所有线条
                 updateLines(
                     topBarIsFixed,
                     viewportWidth,
@@ -1561,8 +1525,6 @@
                     topBarIsFixed ? getFinalRadius(viewportWidth, viewportHeight) : radius
                 );
             }
-
-            // setTopBarFixed, scheduleRingUpdate, window.__ring 等保持不变
 
             function setTopBarFixed(isFixed) {
                 topBarIsFixed = Boolean(isFixed);
@@ -1601,7 +1563,6 @@
         (function () {
             'use strict';
 
-            // 控制顶栏标题的缩放、位移，以及 sticky 状态同步。
             const hero = document.getElementById('hero');
             const topBar = document.getElementById('topBar');
             const topBarInner = topBar.querySelector('.top-bar-inner');
@@ -1611,7 +1572,6 @@
             const topBarBarrier = document.getElementById('topBarBarrier');
             const themeToggle = document.getElementById('themeToggle');
 
-            // 可调参数集中放在这里，便于修改滚动过渡效果。
             const config = {
                 textPrimaryBaseSize: 12,
                 textPrimaryMinSize: 2.8,
@@ -1626,10 +1586,8 @@
             let lastScrollActivity = performance.now();
             let isAutoScrolling = false;
             let hasCheckedPageMovement = false;
-            // 初始化滚动步长缓存
             let topBarAdsorptionFastSpeed = null
 
-            // 进度从首屏居中状态过渡到顶栏左侧状态。
             function updateTextStyles(progress) {
                 const p = Math.min(Math.max(progress, 0), 1);
 
@@ -1667,7 +1625,6 @@
                 updateRingForTopBarState(isStuck);
             }
 
-            // 将根元素中的像素或视口高度单位转换为像素值。
             function getRootLengthInPixels(propertyName) {
                 const value = window.getComputedStyle(document.documentElement)
                     .getPropertyValue(propertyName).trim();
@@ -1680,13 +1637,11 @@
                     amount;
             }
 
-            // 读取顶栏吸附开始生效的最大距离。
             function getTopBarAdsorptionDistance() {
                 return getRootLengthInPixels('--top-bar-adsorption');
             }
 
 
-            // 将根元素中的秒或毫秒时间转换为毫秒值。
             function getRootTimeInMilliseconds(propertyName) {
                 const value = window.getComputedStyle(document.documentElement)
                     .getPropertyValue(propertyName).trim();
@@ -1697,7 +1652,6 @@
                 return match[2].toLowerCase() === 's' ? amount * 1000 : amount;
             }
 
-            // 根据总吸附距离和目标时长计算快速挡的每帧速度。
             function getTopBarAdsorptionFastSpeed(distance) {
                 const duration = getRootTimeInMilliseconds('--top-bar-adsorption-fast-duration');
                 if (duration < 2) return 2;
@@ -1705,7 +1659,6 @@
                 return distance / (duration / 1000 * 60);
             }
 
-            // 在页面静止后按剩余距离执行顶栏两挡速度吸附。
             function runTopBarAdsorption() {
                 adsorptionFrame = null;
 
@@ -1728,7 +1681,6 @@
                     return;
                 }
 
-                // 读取顶栏吸附切换到低速档的剩余距离。
                 const speedSwitch = getRootLengthInPixels('--top-bar-adsorption-speed-switch');
                 if (topBarAdsorptionFastSpeed === null) {
                     topBarAdsorptionFastSpeed = getTopBarAdsorptionFastSpeed(distance);
@@ -1748,16 +1700,13 @@
                     isAutoScrolling = false;
                 });
                 adsorptionFrame = window.requestAnimationFrame(runTopBarAdsorption);
-                //console.log(distance, scrollStep)
             }
 
-            // 调度顶栏吸附帧，并在暂停期间保持停止状态。
             function scheduleTopBarAdsorption() {
                 if (window.__pageLayout.isPaused() || adsorptionFrame !== null) return;
                 adsorptionFrame = window.requestAnimationFrame(runTopBarAdsorption);
             }
 
-            // 用户尝试滚动时立即取消当前吸附，并重新开始静止计时。
             function interruptTopBarAdsorption() {
                 if (adsorptionFrame !== null) {
                     window.cancelAnimationFrame(adsorptionFrame);
@@ -1793,7 +1742,6 @@
                 isRafScheduled = false;
             }
 
-            // 用 requestAnimationFrame 合并同一帧内的滚动更新。
             function handleScroll() {
                 if (window.__pageLayout.isPaused()) return;
                 if (!isAutoScrolling) lastScrollActivity = performance.now();
@@ -1832,22 +1780,18 @@
                     const widthChanged = newWidth !== lastWidth;
                     const heightChanged = newHeight !== lastHeight;
 
-                    // 没有任何变化则直接返回
                     if (!widthChanged && !heightChanged) return;
 
-                    // 以当前宽度判断移动端
                     const isMobile = newWidth <= breakpoint;
-                    // 移动端：宽/高变化均不显示遮罩，只刷新布局
                     if (isMobile) {
                         clearTimeout(updateTimer);
                         updateTimer = setTimeout(() => {
-                            window.__pageLayout.update(); // 直接更新，无遮罩
-                        }, 50); // 防抖延迟，防止高频触发
+                            window.__pageLayout.update();
+                        }, 50);
                     } else {
                         window.__pageLayout.pause(300);
                     }
 
-                    // 更新记录值
                     lastWidth = newWidth;
                     lastHeight = newHeight;
                 }, { passive: true });
@@ -1866,7 +1810,6 @@
                 initialize();
             }
 
-            // 保留调试接口，便于检查滚动进度和顶栏状态。
             window.__framework = {
                 config: config,
                 getScrollProgress: () => scrollProgress,
