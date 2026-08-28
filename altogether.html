@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="CrepaRB">
+    <meta name="author" content="DeepSeek">
+    <meta name="author" content="ChatGPT">
+    <meta name="description" content="一份简历，属于网名岑鸽的人类。">
+    <title>何人的简历</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 设计令牌：颜色、间距、字体和背景动画参数。 */
+        :root {
+            --light-color-bg-default: #EEF;
+            --light-color-text-primary: #3B526B;
+            --light-color-text-secondary: #6B869E;
+            --light-color-bg-topbar: #E8F0FE;
+            --light-color-bg-topbar-t : #E8F0FE00;
+            --light-pause-transition-color: #FFF;
+            --light-pause-background-color: #EEF;
+
+            --dark-color-bg-default: #000005;
+            --dark-color-text-primary: #95c0e5;
+            --dark-color-text-secondary: #7896b3;
+            --dark-color-bg-topbar: #1a1a1a;
+            --dark-color-bg-topbar-t : #1a1a1a00;
+            --dark-pause-transition-color: #000;
+            --dark-pause-background-color: #000005;
+
+            --color-accent: #006ED356;
+            --color-border: #004A9437;
+            --title1-max-width: 80%;
+
+            --content-text-primary-transparent: #3B526B33;
+            --content-text-secondary-transparent: #6B869E33;
+            --content-card-bg: #006AFF0C;
+            --content-card-bg-light: #0066FF05;
+            --content-card-bg-alt: #0059FF17;
+            --content-accent-line: #006ED356;
+            --content-strong-color: var(--content-accent-line);
+
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+
+            --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --font-size-hero-title: clamp(6rem, 18vw, 22rem);
+            --font-size-topbar: 1rem;
+
+            --topbar-height: 4rem;
+            --topbar-padding-x: var(--space-lg);
+            --top-bar-blur: 10px;
+            --top-bar-adsorption: 80vh;
+            --top-bar-adsorption-speed-switch: 20px;
+            --top-bar-adsorption-fast-duration: 0.3s;
+
+            --decoration-size: clamp(180px, 25vw, 360px);
+
+            --wire-breakpoint: 768px;
+            --wire-mobile-layer-count: 10;
+            --wire-pc-layer-count: 6;
+            --wire-pc-repeat-gap: 10vh;
+            --wire-mobile-depth-zero-scale: 0.7;
+            --wire-mobile-depth-zero-color: #006ED356;
+            --wire-mobile-depth-zero-line-width: 15px;
+            --wire-pc-depth-zero-scale: 0.5;
+            --wire-pc-depth-zero-color: #006ED356;
+            --wire-pc-depth-zero-line-width: 10px;
+            --wire-in-distance: 200px;
+            --max-depth: 20;
+
+            --ring-blur: 4px;
+            --ring-stroke-color: #006ED356;
+            --ring-stroke-width: 3px;
+            --ring-fill-color: #0084ff0A;
+            --ring-fixed-in-duration: 1s;
+            --hero-transition-height: 40vh;
+            --decoration-line-color: var(--ring-stroke-color);
+            --decoration-line-stroke: 2px;
+            --decoration-line-focus-height: 33vh;
+            --decoration-line-sub-height: 15vw;
+
+        }
+
+        body[data-theme="light"] {
+            --color-bg-default: var(--light-color-bg-default);
+            --color-text-primary: var(--light-color-text-primary);
+            --color-text-secondary: var(--light-color-text-secondary);
+            --color-bg-topbar: var(--light-color-bg-topbar);
+            --color-bg-topbar-t: var(--light-color-bg-topbar-t);
+            --pause-transition-color: var(--light-pause-transition-color);
+            --pause-background-color: var(--light-pause-background-color);
+        }
+
+        body[data-theme="dark"] {
+            --color-bg-default: var(--dark-color-bg-default);
+            --color-text-primary: var(--dark-color-text-primary);
+            --color-text-secondary: var(--dark-color-text-secondary);
+            --color-bg-topbar: var(--dark-color-bg-topbar);
+            --color-bg-topbar-t: var(--dark-color-bg-topbar-t);
+            --pause-transition-color: var(--dark-pause-transition-color);
+            --pause-background-color: var(--dark-pause-background-color);
+        }
+
+        /* 基础样式重置。 */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-family: var(--font-family-base);
+            scroll-behavior: auto;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            color: var(--color-text-primary);
+            background-color: var(--color-bg-default);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* 固定背景层不参与页面布局。 */
+        .background-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-color: var(--color-bg-default);
+            pointer-events: none;
+            overflow: visible;
+            transition: background-color 0.3s ease;
+        }
+
+        .background-layer>* {
+            pointer-events: auto;
+        }
+
+        /* 深度线框随滚动产生视差位移。 */
+        .wire-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 8000px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        svg.depth-wire-frame {
+            position: absolute;
+            overflow: visible;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .st0 {
+            fill: none;
+            stroke: var(--wire-depth-zero-color);
+            stroke-width: var(--wire-depth-zero-line-width);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* 由 SVG mask 限定范围的环形模糊层。 */
+        .ring-overlay {
+            position: fixed;
+            inset: 0;
+            display: block;
+            pointer-events: none;
+            z-index: 2;
+            -webkit-backdrop-filter: blur(var(--ring-blur));
+            backdrop-filter: blur(var(--ring-blur));
+            -webkit-mask: url(#ring-mask);
+            mask: url(#ring-mask);
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+        }
+
+        /* 环形描边层，与模糊层共享几何参数。 */
+        .ring-stroke {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .ring-stroke.is-fixed {
+            position: fixed;
+            z-index: 1;
+        }
+
+        .ring-stroke svg {
+            position: absolute;
+            overflow: visible;
+            pointer-events: none;
+        }
+
+        .ring-stroke.is-fixed svg circle {
+            fill: var(--ring-fill-color);
+            transition: opacity var(--ring-fixed-in-duration) ease, fill var(--ring-fixed-in-duration) ease;
+            box-shadow:
+                0 20px 5px rgba(0, 0, 0, 1),
+                0 16px 12px -8px rgba(0, 0, 0, 0.6);
+        }
+
+        /* 装饰直线 */
+        .decoration-line {
+            transition: none;
+            opacity: 0;
+        }
+
+        .ring-stroke.is-fixed svg .decoration-line {
+            transition: opacity var(--ring-fixed-in-duration) ease;
+            opacity: 1;
+            box-shadow:
+                0 10px 5px rgba(0, 0, 0, 1),
+                0 16px 12px -8px rgba(0, 0, 0, 0.6);
+        }
+
+        /* 暂停渲染时覆盖页面内容的过渡遮罩。 */
+        .pause-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: grid;
+            place-items: center;
+            background: var(--pause-background-color);
+            color: var(--color-accent);
+            font: 600 1.25rem/1.5 sans-serif;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes pause-screen-enter {
+            from { background: var(--pause-transition-color); }
+            to { background: var(--pause-background-color); }
+        }
+
+        .pause-screen.is-entering {
+            animation: pause-screen-enter 0.3s ease both;
+        }
+
+        .pause-screen[hidden] {
+            display: none;
+        }
+
+        .pause-screen.is-closing {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* 页面内容层。 */
+        .page-wrapper {
+            top: 100vh;
+            position: relative;
+            z-index: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background-color 0.3s ease;
+            border-left:1px rgba(0, 0, 0, 0.1) solid;
+            border-right:1px rgba(0, 0, 0, 0.1) solid;
+            border-top:1px rgba(0, 0, 0, 0.1) solid;
+        }
+
+        /* 首屏装饰区域。 */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            height: 100dvh;
+            flex-shrink: 0;
+            padding: var(--space-lg);
+            text-align: center;
+            z-index: -5;
+        }
+
+        .hero-title {
+            font-size: var(--font-size-hero-title);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: var(--space-lg);
+            color: transparent;
+            -webkit-text-stroke: 5px var(--color-text-secondary);
+            -webkit-mask-image: linear-gradient(to bottom, var(--color-text-secondary) 20%, var(--content-text-secondary-transparent) 100%);
+            mask-image: linear-gradient(to bottom, var(--color-text-secondary) 20%, var(--content-text-secondary-transparent) 100%);
+            user-select: none;
+            transition: -webkit-text-stroke-color 0.3s ease;
+        }
+
+        .hero-decoration {
+            width: var(--decoration-size);
+            height: var(--decoration-size);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-decoration svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .hero-decoration-text {
+            display: block;
+            font-size: var(--font-size-hero-title);
+            font-weight: 700;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 5px var(--color-text-secondary);
+            -webkit-mask-image: linear-gradient(to bottom, var(--color-text-secondary) 20%, var(--content-text-secondary-transparent) 100%);
+            mask-image: linear-gradient(to bottom, var(--color-text-secondary) 20%, var(--content-text-secondary-transparent) 100%);
+            white-space: nowrap;
+            user-select: none;
+            transition: -webkit-text-stroke-color 0.3s ease;
+        }
+
+        /* 顶栏从首屏下方进入文档流，滚动到顶部后固定。 */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            min-height: var(--topbar-height);
+            background-color: color-mix(in srgb, var(--color-bg-topbar) 10%, transparent);
+            -webkit-backdrop-filter: blur(var(--top-bar-blur));
+            backdrop-filter: blur(var(--top-bar-blur));
+            border-bottom: 1px solid var(--color-border);
+            padding: 0 var(--topbar-padding-x);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .top-bar.is-stuck {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .top-bar-inner {
+            position: relative;
+            display: block;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            z-index: 3;
+            display: block;
+            width: 2rem;
+            height: 2rem;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            transform: translateY(-50%);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0s, color 0.3s ease, visibility 0s;
+        }
+
+        .top-bar.is-stuck .theme-toggle {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .top-bar.is-stuck .top-bar-barrier {
+            display: none;
+        }
+
+        .theme-toggle:focus-visible {
+            outline: 2px solid var(--color-text-secondary);
+            outline-offset: 2px;
+        }
+
+        /* 两段文字共享定位上下文，副标题贴在主标题右侧。 */
+        .top-bar-title-group {
+            display: flex;
+            align-items: flex-end;
+            width: fit-content;
+            max-width: 100%;
+            margin: 0 auto;
+            transform: translateX(0);
+            transition: transform 0.1s ease-out;
+        }
+
+        .top-bar-text {
+            font-size: var(--font-size-topbar);
+            font-weight: 500;
+            line-height: 1.2;
+            white-space: nowrap;
+            transition:
+                font-size 0.1s ease-out,
+                color 0.3s ease;
+        }
+
+        .top-bar-text-primary {
+            display: block;
+            width: fit-content;
+            max-width: min(var(--title1-max-width), 100%);
+            color: var(--color-text-primary);
+            font-weight: 400;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: clip;
+            mask-image: linear-gradient(
+                to right,
+                black 95%,
+                transparent
+            );
+        }
+
+        .top-bar-text-secondary {
+            display: block;
+            flex: 0 0 auto;
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* 随标题组移动的遮挡渐变。 */
+        .top-bar-barrier {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 2;
+            pointer-events: none;
+            overflow: hidden;
+            background: linear-gradient(
+                to right,
+                (in srgb, var(--color-bg-default) 0%, transparent) 0%,
+                (in srgb, var(--color-bg-default) 100%, transparent) 10%
+            );
+        }
+
+        .footer { width: 100%; font-size: 0.6em; background-color: #00000000; padding: 10px; text-align: center; color: #6c757d; }
+
+        /* 简历内容区域。 */
+        .content {
+            flex: 1;
+            padding: var(--space-xl) var(--space-lg);
+            min-height: 150vh;
+        }
+
+        #mainContent {
+            padding: 20px;
+            min-height: 0;
+        }
+
+        #mainContent h1 {
+            font-size: 2.3rem;
+            font-weight: 400;
+            color: var(--color-text-primary);
+            letter-spacing: 2px;
+        }
+
+        #mainContent h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin: 16px 0 8px;
+        }
+
+        #mainContent h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin: 24px 0 12px;
+        }
+
+        #mainContent h4 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin: 0;
+        }
+
+        #mainContent p,
+        #mainContent pre {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            margin: 12px 0;
+        }
+
+        #mainContent h1,
+        #mainContent h2,
+        #mainContent h3,
+        #mainContent h4,
+        #mainContent p,
+        #mainContent pre,
+        #mainContent ul {
+            transition: color 0.3s ease;
+        }
+
+        #mainContent pre {
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        #mainContent hr {
+            border: 0;
+            height: 2px;
+            width: 100%;
+            background: linear-gradient(to right, transparent 0%, var(--content-accent-line) 20%, var(--content-accent-line) 80%, transparent 100%);
+            margin: 25px 0;
+            opacity: 0.76;
+        }
+
+        #mainContent .card {
+            background-color: var(--content-card-bg);
+            padding: 15px 20px;
+            border-radius: 6px;
+            border-left: 0 solid var(--content-card-bg);
+            border-right: 5px solid var(--content-card-bg-light);
+            transition: 0.3s;
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+        }
+
+        #mainContent .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border-left: 3px solid var(--content-strong-color);
+            border-right: 0 solid var(--content-card-bg);
+            transition: 0.3s ease;
+        }
+
+        #mainContent .drop-cap::first-letter {
+            float: left;
+            font-size: 2.2em;
+            line-height: 0.8;
+            margin: 0.2em 0.08em 0.05em 0;
+            color: var(--color-text-primary);
+            font-weight: 400;
+        }
+
+        #mainContent .capacity-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 12px 0 20px;
+            overflow-x: auto;
+            padding: 10px;
+        }
+
+        #mainContent .capacity-card {
+            background-color: var(--content-card-bg-alt);
+            border-radius: 6px;
+            padding: 16px 18px;
+            transition: 0.35s;
+            border-left: 0 solid transparent;
+            border-right: 0 solid var(--content-card-bg-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #mainContent .capacity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+            border-left: 3px solid var(--content-strong-color);
+        }
+
+        #mainContent .card-content { display: flex; align-items: center; gap: 14px; width: 100%; }
+        #mainContent .card-icon {
+            flex: 0 0 48px;
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background-color: var(--content-strong-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 22px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #mainContent .tag-list {
+            display: flex;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 12px 0 20px;
+            overflow-x: auto;
+            padding: 10px;
+        }
+
+        #mainContent .tag-list >* {display: inline-flex;white-space: nowrap;text-align: center;}
+
+        #mainContent .capacity-card:hover .card-icon { background-color: var(--color-border); transform: scale(1.02); }
+        #mainContent .card-icon i { display: block; line-height: 1; }
+        #mainContent .card-info { flex: 1; min-width: 0; }
+        #mainContent .card-title { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 8px; margin-bottom: 6px; }
+        #mainContent .progress-track { width: 100%; height: 6px; background-color: rgba(255, 255, 255, 0.7); border-radius: 4px; overflow: hidden; margin-top: 2px; }
+        #mainContent .progress-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--color-text-secondary), var(--color-text-primary)); transition: 0.6s cubic-bezier(0.22, 0.61, 0.36, 1); }
+        #mainContent .capacity-card:hover .progress-fill { filter: brightness(1.6); }
+        #mainContent .card-desc-wrapper { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.35s ease, margin 0.35s ease; margin-top: 0; }
+        #mainContent .card-desc { font-size: 0.88rem; line-height: 1.55; color: var(--color-text-secondary); padding-top: 10px; border-top: 1px dashed var(--color-text-secondary); margin-top: 2px; }
+        #mainContent .capacity-lore-for-pc { opacity: 0; transition: 0.35s ease; }
+        #mainContent .capacity-lore-for-pc.is-visible { opacity: 1; }
+        #mainContent .tools-list { display: flex; flex-wrap: wrap; gap: 10px 12px; margin: 4px 0 12px; }
+        #mainContent .tool-tag { display: inline-flex; align-items: center; gap: 6px; background-color: var(--content-card-bg); padding: 5px 14px 5px 12px; border-radius: 20px; font-size: 0.82rem; color: var(--color-text-secondary); transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02); border: 1px solid rgba(169, 206, 240, 0.2); }
+        #mainContent .tool-tag i { font-size: 0.9rem; color: var(--content-strong-color); width: 1.1em; text-align: center; }
+        #mainContent .tool-tag:hover { background-color: var(--content-card-bg-light); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); border-color: var(--content-strong-color); }
+        #mainContent .tool-tag:hover i { color: var(--color-text-primary); }
+
+        /* 响应式布局。 */
+        @media (min-width: 769px) {
+            #mainContent .capacity-list { display: flex; gap: 16px; overflow-x: auto; }
+            #mainContent .capacity-card { flex: 0 0 260px; }
+            #mainContent .capacity-card .card-desc-wrapper { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --topbar-height: 3.5rem;
+                --topbar-padding-x: var(--space-sm);
+                --space-xl: 2rem;
+                --space-lg: 1.5rem;
+
+                --decoration-size: clamp(120px, 35vw, 220px);
+            }
+
+            .hero {
+                padding: var(--space-md);
+            }
+
+            .top-bar-text {
+                font-size: 0.8rem;
+            }
+
+            #mainContent .tag-list {display: grid;grid-template-columns: 1fr 1fr;}
+            #mainContent .capacity-list {display: grid;grid-template-columns: 1fr;}
+            #mainContent .capacity-card { padding: 14px; }
+            #mainContent .card-icon { flex-basis: 42px; width: 42px; height: 42px; font-size: 18px; border-radius: 8px; }
+            #mainContent .card-desc { font-size: 0.82rem; }
+            #mainContent .tool-tag { font-size: 0.75rem; padding: 4px 12px 4px 10px; }
+            #mainContent .capacity-card:hover .card-desc-wrapper { max-height: 180px; opacity: 1; margin-top: 6px; }
+        }
+
+        @media (min-width: 1200px) {
+            :root {
+                --topbar-height: 4.5rem;
+                --topbar-padding-x: var(--space-xl);
+            }
+            .page-wrapper {
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: var(--space-lg);
+                padding-right: var(--space-lg);
+            }
+            .content {max-width: 1200px;align-self: center;margin-left: auto;margin-right: auto;}
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            .top-bar-text {
+                transition: none !important;
+            }
+        }
+    </style>
+    <script>
+        history.scrollRestoration = "manual";
+        window.scrollTo(0, 0);
+    </script>
+</head>
+
+<body>
+
+    <!-- 固定背景：深度线框、环形效果和首屏装饰。 -->
+    <div class="background-layer" id="backgroundLayer" aria-hidden="true">
+        <!-- 动态生成的深度线框挂载点。 -->
+        <div id="wire-layer" class="wire-layer"></div>
+
+        <!-- 环形模糊层使用的 SVG 遮罩。 -->
+        <svg width="0" height="0" style="position: absolute;">
+            <defs>
+                <mask id="ring-mask">
+                    <rect x="0" y="0" width="100%" height="100%" fill="black"></rect>
+                    <circle id="mask-circle" cx="0" cy="0" r="0" fill="white"></circle>
+                    <rect id="mask-rect" x="0" y="0" width="0" height="0" fill="white"></rect>
+                </mask>
+            </defs>
+        </svg>
+
+        <!-- 由 SVG 遮罩限定范围的环形模糊。 -->
+        <div class="ring-overlay" role="presentation"></div>
+
+        <!-- 与模糊层共享几何参数的环形描边+直线装饰。 -->
+        <div class="ring-stroke">
+            <svg id="ring-stroke-svg" width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+                <circle id="ring-stroke-circle" cx="0" cy="0" r="0" fill="none" stroke="var(--ring-stroke-color)" stroke-width="var(--ring-stroke-width)" vector-effect="non-scaling-stroke" />
+                <line id="line-left" class="decoration-line" x1="0" y1="0" x2="0" y2="0" stroke="var(--ring-stroke-color)" stroke-width="var(--ring-stroke-width)" stroke-linecap="round" />
+                <line id="line-right" class="decoration-line" x1="0" y1="0" x2="0" y2="0" stroke="var(--ring-stroke-color)" stroke-width="var(--ring-stroke-width)" stroke-linecap="round" />
+                <line id="subline-left" class="decoration-line" x1="0" y1="0" x2="0" y2="0" stroke="var(--ring-stroke-color)" stroke-width="var(--ring-stroke-width)" stroke-linecap="round" />
+                <line id="subline-right" class="decoration-line" x1="0" y1="0" x2="0" y2="0" stroke="var(--ring-stroke-color)" stroke-width="var(--ring-stroke-width)" stroke-linecap="round" />
+            </svg>
+        </div>
+
+        <!-- 由 JavaScript 克隆并定位到各深度层的模板。 -->
+        <template id="wire-template">
+            <svg class="depth-wire-frame" viewBox="0 0 875 875">
+                <rect class="st0" x="0" y="0" width="875" height="875"></rect>
+                <line class="st0" x1="0" y1="175" x2="875" y2="175"></line>
+                <line class="st0" x1="0" y1="350" x2="875" y2="350"></line>
+                <line class="st0" x1="0" y1="525" x2="875" y2="525"></line>
+                <line class="st0" x1="0" y1="700" x2="875" y2="700"></line>
+                <line class="st0" x1="175" y1="0" x2="175" y2="875"></line>
+                <line class="st0" x1="350" y1="0" x2="350" y2="875"></line>
+                <line class="st0" x1="525" y1="0" x2="525" y2="875"></line>
+                <line class="st0" x1="700" y1="0" x2="700" y2="875"></line>
+            </svg>
+        </template>
+
+        <!-- 首屏装饰。 -->
+        <section class="hero" id="hero">
+            <div class="hero-title"><i class="fa-solid fa-arrow-up-long"></i></div>
+            <div class="hero-decoration" aria-hidden="true">
+                <span class="hero-decoration-text">Welcome</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- 窗口尺寸变化时暂停渲染的过渡遮罩。 -->
+    <div id="pause-screen" class="pause-screen" hidden aria-live="polite">
+        <div><i class="fa-solid fa-hourglass"></i><p style="display:inline">等待页面稳定</p></div>
+    </div>
+
+    <!-- 页面内容层，位于固定背景之上。 -->
+    <div class="page-wrapper">
+
+        <!-- 滚动后固定的顶栏。 -->
+        <header class="top-bar" id="topBar">
+            <div class="top-bar-inner">
+                <div class="top-bar-title-group" id="topBarTitleGroup">
+                    <!-- 主标题由 JS 缩放，标题组负责整体移动。 -->
+                    <span class="top-bar-text top-bar-text-primary" id="textPrimary">About 岑鸽&nbsp;</span>
+                    <!-- 始终贴在主标题右侧的副标题。 -->
+                    <pre class="top-bar-text top-bar-text-secondary" id="textSecondary">（当然不是本名）</pre>
+                </div>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换到夜间模式" aria-pressed="false">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <span class="top-bar-barrier" id="topBarBarrier" aria-hidden="true"></span>
+            </div>
+        </header>
+
+        <!-- 简历正文。 -->
+        <main class="content" id="mainContent">
+            <noscript>
+                <br />
+                <div class="card">
+                    <hr>
+                    <p class="drop-cap">衷心希望您能够使用支持JavaScript的浏览器访问此页面，亦不要通过禁用JavaScript阻止本页面正常运作。</p>
+                    <hr>
+                </div>
+            </noscript>
+
+            <h2>关于我……</h2><div class="tag-list">
+                <h3 style="display:inline" class="card">完美主义</h3><h3 style="display:inline" class="card">数学苦手</h3><h3 style="display:inline" class="card">兴趣优先</h3><h3 style="display:inline" class="card">乐于创作</h3><h3 style="display:inline" class="card">温柔可爱……？</h3>
+            </div>
+
+            <h3>联系方式</h3>
+            <p class="card">大多数平台，不叫岑鸽就叫CrepaRB<br /></p>
+
+            <h3>教育经历</h3>
+            <div class="card">
+                <p>2023.09 - 2026.06<br />就读于哈尔滨市一所市重点高中 选科物化生。<br />
+                </p><p>2026.09 - <br />即将就读于东北农业大学生命科学学院 生物科学专业。</p>
+                <p>只是一位平平无奇的学生</p>
+            </div>
+            </pre>
+
+            <h3>技术能力</h3>
+            <div class="card">
+                <div id="capacity-list" class="capacity-list">
+                    <div class="capacity-card" data-progress="html">
+                        <div class="card-content"><div class="card-icon"><i class="fab fa-html5"></i></div><div class="card-info"><div class="card-title"><h4>HTML / CSS</h4><span>~90%</span></div><div class="progress-track"><div class="progress-fill" style="width:90%"></div></div></div></div>
+                        <div class="card-desc-wrapper"><div class="card-desc">了解网页需要包含的内容要素，能够编写较复杂页面，能够独立维护复杂的大型样式表。</div></div>
+                    </div>
+                    <div class="capacity-card" data-progress="js">
+                        <div class="card-content"><div class="card-icon"><i class="fab fa-js"></i></div><div class="card-info"><div class="card-title"><h4>JavaScript</h4><span>~60%</span></div><div class="progress-track"><div class="progress-fill" style="width:60%"></div></div></div></div>
+                        <div class="card-desc-wrapper"><div class="card-desc">正在学习 DOM 与交互开发，能够制作响应式、可交互的精美静态网页。<br />能够构建简单的脚本，能够自行对复杂脚本进行简单修改。</div></div>
+                    </div>
+                    <div class="capacity-card" data-progress="devops">
+                        <div class="card-content"><div class="card-icon"><i class="fas fa-server"></i></div><div class="card-info"><div class="card-title"><h4>设备运维</h4><span>~30%</span></div><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div></div></div>
+                        <div class="card-desc-wrapper"><div class="card-desc">符合微软初级用户的定义（），小学到初中到高中一直在协助老师管理电子教学白板。<br />（Wait，这种程度的工作真的算运维么？）</div></div>
+                    </div>
+                    <div class="capacity-card" data-progress="python">
+                        <div class="card-content"><div class="card-icon"><i class="fab fa-python"></i></div><div class="card-info"><div class="card-title"><h4>Python</h4><span>~10%</span></div><div class="progress-track"><div class="progress-fill" style="width:10%"></div></div></div></div>
+                        <div class="card-desc-wrapper"><div class="card-desc">熟悉基础语法与环境管理，对于正式的开发流程较为生疏。</div></div>
+                    </div>
+                </div>
+                <div id="capacity-lore-for-pc" class="capacity-lore-for-pc"></div>
+            </div>
+
+            <h3>常用工具</h3>
+            <div class="tools-list">
+                <span class="tool-tag"><i class="fab fa-git-alt"></i> Git</span>
+                <span class="tool-tag"><i class="fab fa-linux"></i> Linux</span>
+                <span class="tool-tag"><i class="fas fa-code"></i> VS Code</span>
+                <span class="tool-tag"><i class="fas fa-robot"></i> AI 辅助</span>
+            </div>
+
+            <h3>兴趣爱好</h3>
+            <p class="card">除去计算机相关的之外，唱歌画画之类，都感一点点兴趣，也都没有达到精通的程度</p>
+
+            <hr>
+            <h2>关于此页</h2>
+            <div class="card">
+                <p class="drop-cap">此页面包含如下设计：<br /><br /></p>
+                <ul>
+                    <li>具有视差效果、入场动画的简约线框，可通过类注册表设计迅速配置。</li>
+                    <li>精心设计运动规律，营造扩散入场效果的模糊背景。</li>
+                    <li>动态样式、自动向上吸附的顶栏。</li>
+                    <li>完善的日夜间模式切换。</li>
+                    <li>完善的变量控制——线框表现细节、背景模糊强度、顶栏吸附行为细节、大部分配色……种种细节均由CSS内的根变量控制。</li>
+                    <li>微交互设计，保证鲜活的浏览体验。</li>
+                    <li>响应式布局，适配不同屏幕尺寸，部分元素在不同布局中有截然不同的表现。</li>
+                    <li>背景线框装饰对移动端与桌面端采用不同编组，发生切换时顺利重绘。</li>
+                    <li>优雅的优化设计，调整页面大小时自动暂停一切由JS驱动的动态内容，降低性能负担。</li>
+                    <br />
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            © 2026 CrepaRB. All Rights Reserved.<br />
+            Source code is licensed under <a href="/LICENSE">GNU GPL v3.0</a>.
+        </footer>
+
+    </div>
+
+    <!-- 背景和布局脚本按依赖顺序加载。 -->
+    <script>
+        (function() {
+            'use strict';
+
+            // 统一管理主题、布局更新器和尺寸变化时的短暂暂停。
+
+            let pagePaused = false;
+            let pauseTimer = null;
+            let pauseCloseTimer = null;
+            const layoutUpdaters = [];
+
+            const themeStorageKey = 'resume-theme';
+            const themeToggle = document.getElementById('themeToggle');
+            const existingTheme = document.body.dataset.theme;
+            const savedTheme = window.localStorage.getItem(themeStorageKey);
+            let currentTheme = existingTheme === 'light' || existingTheme === 'dark' ?
+                existingTheme :
+                savedTheme === 'light' || savedTheme === 'dark' ?
+                savedTheme :
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+            function updateThemeButton() {
+                const isDark = currentTheme === 'dark';
+                document.body.dataset.theme = currentTheme;
+                themeToggle.innerHTML =
+                `<i class="fas fa-${isDark ? 'sun' : 'moon'}" aria-hidden="true" position="absolute"></i>`;
+                themeToggle.setAttribute('aria-label', isDark ? '切换到日间模式' : '切换到夜间模式');
+                themeToggle.setAttribute('aria-pressed', String(isDark));
+            }
+
+            updateThemeButton();
+
+            themeToggle.addEventListener('click', function() {
+                currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                window.localStorage.setItem(themeStorageKey, currentTheme);
+                updateThemeButton();
+                window.__pageLayout.update();
+            });
+
+            window.__pageLayout = {
+                register: function(updater) {
+                    layoutUpdaters.push(updater);
+                },
+                update: function() {
+                    if (pagePaused) return;
+                    layoutUpdaters.forEach(function(updater) { updater(); });
+                },
+                isPaused: function() {
+                    return pagePaused;
+                }
+            };
+
+            // 尺寸变化期间暂停布局更新，稳定后统一刷新并关闭遮罩。
+            window.__pageLayout.pause = function pausePage(duration) {
+                const pauseScreen = document.getElementById('pause-screen');
+                const shouldAnimate = pauseScreen.hidden && !pauseScreen.classList.contains('is-closing');
+                const wasClosing = pauseScreen.classList.contains('is-closing');
+
+                pagePaused = true;
+                clearTimeout(pauseTimer);
+                clearTimeout(pauseCloseTimer);
+                pauseScreen.classList.remove('is-closing');
+                pauseScreen.hidden = false;
+
+                if (shouldAnimate || wasClosing) {
+                    pauseScreen.classList.remove('is-entering');
+                    requestAnimationFrame(function() {
+                        if (pagePaused && !pauseScreen.hidden) {
+                            pauseScreen.classList.add('is-entering');
+                        }
+                    });
+                }
+
+                pauseTimer = setTimeout(function() {
+                    pagePaused = false;
+                    pauseScreen.classList.add('is-closing');
+                    window.__pageLayout.update();
+                    pauseCloseTimer = setTimeout(function() {
+                        pauseScreen.hidden = true;
+                        pauseScreen.classList.remove('is-closing', 'is-entering');
+                    }, 300);
+                }, Math.max(0, duration));
+            };
+
+            window.__pageLayout.pause(500);
+            window.scrollBy(-10, 0);
+        }());
+    </script>
+    <script>
+        (function() {
+            'use strict';
+
+            // 生成分层线框，并在滚动和尺寸变化时更新其视差位置。
+
+            const wireRegistry = {
+                'elements-mobile': [
+                    { id: 'wire_001', x: -0.1, y: 0.1, depth: 0 },
+                    { id: 'wire_002', x: 0.85, y: 0, depth: 3 },
+                    { id: 'wire_003', x: 0.55, y: 0.4, depth: 12 },
+                    { id: 'wire_004', x: 0.35, y: 0.65, depth: 7 }
+                ],
+                'elements-pc': [
+                    { id: 'wire_001', x: -0.02, y: 0.25, depth: 0 },
+                    { id: 'wire_002', x: 0.87, y: 0.1, depth: 3 },
+                    { id: 'wire_003', x: 0.52, y: 0.55, depth: 10 },
+                    { id: 'wire_004', x: 0.95, y: 0.7, depth: 5 }
+                ]
+            };
+
+            const initialViewport = { height: window.innerHeight };
+            const wires = [];
+            const runtimeRegistry = { elements: [] };
+            const welcomeDecoration = document.querySelector('.hero-decoration');
+            const welcomeTitle = document.querySelector('.hero-title');
+            let currentLayout;
+            let lastWidth = window.innerWidth;
+            let scrollFrame = null;
+
+            function getCssNumber(name) {
+                return parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name));
+            }
+
+            function getCssValue(name) {
+                return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+            }
+
+            function getLayout() {
+                return window.innerWidth <= getCssNumber('--wire-breakpoint') ? 'mobile' : 'pc';
+            }
+
+            function generateWireRegistry(layout) {
+                const source = wireRegistry['elements-' + layout];
+                const count = getCssNumber('--wire-' + layout + '-layer-count');
+                const repeatGap = layout === 'pc' ? getCssNumber('--wire-pc-repeat-gap') / 100 : 0;
+                const result = [];
+
+                // 每一层复用同一组线框，通过 y 偏移形成纵深。
+                for (let layer = 0; layer < count; layer += 1) {
+                    source.forEach(function(item) {
+                        result.push({
+                            id: item.id + '_layer_' + layer,
+                            x: item.x,
+                            y: item.y + layer * (1 + repeatGap),
+                            depth: item.depth,
+                            layout: layout
+                        });
+                    });
+                }
+
+                return result;
+            }
+
+            class DepthWireFrame {
+                constructor(data) {
+                    this.data = data;
+                    this.svg = document.getElementById('wire-template').content.firstElementChild.cloneNode(true);
+                    this.svg.style.setProperty('--wire-depth-zero-color', getCssValue('--wire-' + data.layout +
+                        '-depth-zero-color'));
+                    this.svg.style.setProperty('--wire-depth-zero-line-width', getCssValue('--wire-' + data.layout +
+                        '-depth-zero-line-width'));
+                    this.svg.style.zIndex = 100 - data.depth;
+                    document.getElementById('wire-layer').appendChild(this.svg);
+                    this.progress = 0;
+                    this.lines = Array.from(this.svg.querySelectorAll('.st0'));
+                    this.prepareDraw();
+                    this.resize();
+                    this.animateDraw();
+                }
+
+                get scale() {
+                    return 1 / (1 + this.data.depth * 0.12);
+                }
+
+                get brightness() {
+                    return Math.max(15, 100 - this.data.depth * 6);
+                }
+
+                get movementFactor() {
+                    const maxDepth = getCssNumber('--max-depth');
+                    if (maxDepth <= 0) return 0;
+                    const motionDepth = Math.min(Math.max(this.data.depth, 0), maxDepth);
+                    return 1 - motionDepth / maxDepth;
+                }
+
+                get entryMovementFactor() {
+                    const maxDepth = getCssNumber('--max-depth');
+                    if (maxDepth <= 0) return 0;
+                    const motionDepth = Math.min(Math.max(this.data.depth, 0), maxDepth);
+                    const perspectiveCoefficient = 0.12;
+                    const perspectiveScale = 1 / (1 + motionDepth * perspectiveCoefficient);
+                    const maxDepthScale = 1 / (1 + maxDepth * perspectiveCoefficient);
+                    // 将不同深度映射到统一的入场位移范围。
+                    return (perspectiveScale - maxDepthScale) / (1 - maxDepthScale);
+                }
+
+                get entryDistance() {
+                    return getCssNumber('--wire-in-distance') * this.entryMovementFactor;
+                }
+
+                get entryOffset() {
+                    const remainingProgress = 1 - this.progress;
+                    return this.entryDistance * remainingProgress * remainingProgress;
+                }
+
+                get depthZeroScale() {
+                    return getCssNumber('--wire-' + this.data.layout + '-depth-zero-scale');
+                }
+
+                resize() {
+                    this.centerX = window.innerWidth * this.data.x;
+                    this.centerY = initialViewport.height * this.data.y;
+                    const size = window.innerWidth / 2 * this.depthZeroScale * this.scale;
+                    this.svg.style.width = size + 'px';
+                    this.svg.style.height = size + 'px';
+                    this.svg.style.left = this.centerX - size / 2 + 'px';
+                    this.svg.style.top = this.centerY - size / 2 + 'px';
+                    this.svg.style.filter = 'brightness(' + this.brightness + '%)';
+                    this.draw();
+                    this.updatePosition();
+                }
+
+                updatePosition(scrollY) {
+                    const currentScrollY = scrollY === undefined ? window.scrollY : scrollY;
+                    const parallaxOffset = -currentScrollY * this.movementFactor;
+                    this.svg.style.transform = 'translateY(' + (parallaxOffset + this.entryOffset) + 'px)';
+                }
+
+                prepareDraw() {
+                    this.lines.forEach(function(line) {
+                        const length = line.getTotalLength();
+                        line.dataset.length = length;
+                        line.style.strokeDasharray = length;
+                        line.style.strokeDashoffset = length;
+                    });
+                }
+
+                animateDraw() {
+                    let previousTime = performance.now();
+                    const duration = 1000;
+                    const frame = (now) => {
+                        if (!window.__pageLayout.isPaused()) {
+                            this.progress = Math.min(1, this.progress + (now - previousTime) / duration);
+                            this.draw();
+                            this.updatePosition();
+                        }
+                        previousTime = now;
+                        if (this.progress < 1) {
+                            requestAnimationFrame(frame);
+                        }
+                    };
+                    requestAnimationFrame(frame);
+                }
+
+                draw() {
+                    this.lines.forEach(function(line) {
+                        line.style.strokeDashoffset = line.dataset.length * (1 - this.progress);
+                    }, this);
+                }
+            }
+
+            function drawLayout(layout) {
+                wires.forEach(function(wire) { wire.svg.remove(); });
+                wires.length = 0;
+                runtimeRegistry.elements = generateWireRegistry(layout);
+                runtimeRegistry.elements.forEach(function(data) {
+                    wires.push(new DepthWireFrame(data));
+                });
+                currentLayout = layout;
+            }
+
+            function updateWireLayout() {
+                const nextLayout = getLayout();
+                if (nextLayout !== currentLayout) {
+                    drawLayout(nextLayout);
+                } else {
+                    wires.forEach(function(wire) { wire.resize(); });
+                }
+                updateWelcomePosition(window.scrollY);
+            }
+
+            function updateWelcomePosition(scrollY) {
+                if (!welcomeDecoration || !welcomeTitle) return;
+                const currentScrollY = scrollY === undefined ? window.scrollY : scrollY;
+                welcomeDecoration.style.transform = 'translateY(' + -currentScrollY + 'px)';
+                welcomeTitle.style.transform = 'translateY(' + -currentScrollY + 'px)';
+            }
+
+            window.__pageLayout.register(updateWireLayout);
+
+            function initialize() {
+                drawLayout(getLayout());
+                updateWelcomePosition();
+
+                window.addEventListener('scroll', function() {
+                    if (window.__pageLayout.isPaused() || scrollFrame !== null) return;
+                    scrollFrame = requestAnimationFrame(function() {
+                        if (!window.__pageLayout.isPaused()) {
+                            wires.forEach(function(wire) { wire.updatePosition(window.scrollY); });
+                            updateWelcomePosition(window.scrollY);
+                        }
+                        scrollFrame = null;
+                    });
+                }, { passive: true });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initialize);
+            } else {
+                initialize();
+            }
+        }());
+    </script>
+    <script>
+        (function() {
+            'use strict';
+
+            const doc = document;
+            const maskCircle = doc.getElementById('mask-circle');
+            const maskRect = doc.getElementById('mask-rect');
+            const strokeSvg = doc.getElementById('ring-stroke-svg');
+            const strokeCircle = doc.getElementById('ring-stroke-circle');
+            const ringLayer = doc.querySelector('.wire-layer');
+            let topBarIsFixed = false;
+
+            // 直接获取 HTML 中预置的线条
+            const lineLeft = doc.getElementById('line-left');
+            const lineRight = doc.getElementById('line-right');
+            const sublineLeft = doc.getElementById('subline-left');
+            const sublineRight = doc.getElementById('subline-right');
+
+            function getCssValue(name) {
+                return getComputedStyle(doc.documentElement).getPropertyValue(name).trim();
+            }
+
+            function toPixels(value) {
+                if (!value) return 0;
+                const text = String(value).trim();
+                if (text.endsWith('px')) return parseFloat(text);
+                if (text.endsWith('vh')) return parseFloat(text) / 100 * window.innerHeight;
+                if (text.endsWith('vw')) return parseFloat(text) / 100 * window.innerWidth;
+                if (text.endsWith('rem')) return parseFloat(text) * parseFloat(getComputedStyle(doc.documentElement)
+                    .fontSize);
+                return parseFloat(text) || 0;
+            }
+
+            function getFinalRadius(viewportWidth, viewportHeight) {
+                const breakpoint = toPixels(getCssValue('--wire-breakpoint') || '768px');
+                const mobileRadius = toPixels('50vw');
+                if (viewportWidth <= breakpoint) return mobileRadius;
+                return Math.min(mobileRadius, viewportHeight * 3 / 5);
+            }
+
+            // 计算圆外一点到圆的两条切点
+            function getTangentPoints(cx, cy, r, px, py) {
+                const dx = px - cx;
+                const dy = py - cy;
+                const d = Math.sqrt(dx * dx + dy * dy);
+                if (d <= r) return null;
+                const theta = Math.atan2(dy, dx);
+                const alpha = Math.acos(r / d);
+                const angle1 = theta + alpha;
+                const angle2 = theta - alpha;
+                return {
+                    t1: { x: cx + r * Math.cos(angle1), y: cy + r * Math.sin(angle1) },
+                    t2: { x: cx + r * Math.cos(angle2), y: cy + r * Math.sin(angle2) }
+                };
+            }
+
+            // 更新四条直线的位置
+            function updateLines(isFixed, vw, vh, cx, cy, radius) {
+                if (!lineLeft || !lineRight || !sublineLeft || !sublineRight) return;
+
+                // 读取所有必要变量
+                const color = getCssValue('--decoration-line-color');
+                const stroke = getCssValue('--decoration-line-stroke');
+                const focusHeightRaw = getCssValue('--decoration-line-focus-height');
+                const subHeightRaw = getCssValue('--decoration-line-sub-height');
+
+                const allVarsExist = color && stroke && focusHeightRaw && subHeightRaw;
+                const focusHeight = allVarsExist ? toPixels(focusHeightRaw) : 0;
+                const subHeight = allVarsExist ? toPixels(subHeightRaw) : 0; // 单位 vw，自动转换
+                const valid = allVarsExist && focusHeight > 0 && subHeight >= 0;
+
+                // 若变量无效，不更新坐标（保留上次位置）
+                if (!valid) return;
+
+                // ---- 计算主直线 ----
+                const O = { x: vw / 2, y: vh - focusHeight };
+                const tangents = getTangentPoints(cx, cy, radius, O.x, O.y);
+                if (!tangents) return;
+
+                const tLeft = tangents.t1.x < tangents.t2.x ? tangents.t1 : tangents.t2;
+                const tRight = tangents.t1.x > tangents.t2.x ? tangents.t1 : tangents.t2;
+
+                const dxL = tLeft.x - O.x;
+                const dyL = tLeft.y - O.y;
+                const lenL = Math.sqrt(dxL * dxL + dyL * dyL);
+                const dxR = tRight.x - O.x;
+                const dyR = tRight.y - O.y;
+                const lenR = Math.sqrt(dxR * dxR + dyR * dyR);
+
+                const halfLen = Math.max(vw, vh) * 2.5;
+                const uL = { x: dxL / lenL, y: dyL / lenL };
+                const uR = { x: dxR / lenR, y: dyR / lenR };
+
+                // 主直线端点
+                const pL1 = { x: O.x - uL.x * halfLen, y: O.y - uL.y * halfLen };
+                const pL2 = { x: O.x + uL.x * halfLen, y: O.y + uL.y * halfLen };
+                const pR1 = { x: O.x - uR.x * halfLen, y: O.y - uR.y * halfLen };
+                const pR2 = { x: O.x + uR.x * halfLen, y: O.y + uR.y * halfLen };
+
+                // 更新坐标
+                lineLeft.setAttribute('x1', pL1.x);
+                lineLeft.setAttribute('y1', pL1.y);
+                lineLeft.setAttribute('x2', pL2.x);
+                lineLeft.setAttribute('y2', pL2.y);
+
+                lineRight.setAttribute('x1', pR1.x);
+                lineRight.setAttribute('y1', pR1.y);
+                lineRight.setAttribute('x2', pR2.x);
+                lineRight.setAttribute('y2', pR2.y);
+
+                // ---- 计算辅助线 ----
+                // 主直线与底边 y=vh 的交点
+                const t_bottom_L = (vh - O.y) / uL.y;
+                const x_bottom_L = O.x + uL.x * t_bottom_L;
+                const pBottomL = { x: x_bottom_L, y: vh };
+
+                const t_bottom_R = (vh - O.y) / uR.y;
+                const x_bottom_R = O.x + uR.x * t_bottom_R;
+                const pBottomR = { x: x_bottom_R, y: vh };
+
+                // 辅助线终点：在侧边上，到底角距离为 subHeight（竖直距离）
+                const endY = vh - subHeight; // subHeight 已转为像素
+
+                // 左侧辅助线：从底边交点向左上至 (0, endY)
+                sublineLeft.setAttribute('x1', pBottomL.x);
+                sublineLeft.setAttribute('y1', pBottomL.y);
+                sublineLeft.setAttribute('x2', vw);
+                sublineLeft.setAttribute('y2', endY);
+
+                // 右侧辅助线：从底边交点向右上至 (vw, endY)
+                sublineRight.setAttribute('x1', pBottomR.x);
+                sublineRight.setAttribute('y1', pBottomR.y);
+                sublineRight.setAttribute('x2', 0);
+                sublineRight.setAttribute('y2', endY);
+            }
+
+            // 原有的 updateRing 保持不变
+            function updateRing() {
+                if (!maskCircle || !maskRect || !strokeSvg || !strokeCircle) return;
+
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                const initialRadius = Math.max(viewportWidth / 6, viewportHeight / 3.375);
+                const targetRadius = initialRadius * 3;
+                const transitionHeight = toPixels(getCssValue('--hero-transition-height') || '300px');
+                const scrollY = window.scrollY || window.pageYOffset || 0;
+                const delta = Math.max(0, Math.min(scrollY, transitionHeight));
+                const radius = initialRadius + delta / (transitionHeight || 1) * (targetRadius - initialRadius);
+                const transitionProgress = delta / (transitionHeight || 1);
+                const centerX = viewportWidth / 2;
+                const centerY = viewportHeight - initialRadius / 3 - scrollY;
+                const displayedCenterY = topBarIsFixed ? -viewportWidth / 6 : centerY;
+                const ringStroke = strokeSvg.closest('.ring-stroke');
+
+                ringStroke?.classList.toggle('is-fixed', topBarIsFixed);
+
+                maskCircle.setAttribute('cx', centerX - 2);
+                maskCircle.setAttribute('cy', displayedCenterY - 12);
+                maskCircle.setAttribute('r', radius - 12);
+                maskRect.setAttribute('x', centerX - radius - 2);
+                maskRect.setAttribute('y', displayedCenterY - 12);
+                maskRect.setAttribute('width', 2 * radius - 12);
+                maskRect.setAttribute('height', ringLayer ? toPixels(getComputedStyle(ringLayer).minHeight) : 0);
+
+                strokeSvg.setAttribute('viewBox', '0 0 ' + viewportWidth + ' ' + viewportHeight);
+                strokeCircle.setAttribute('cx', centerX);
+                strokeCircle.setAttribute('cy', displayedCenterY);
+                strokeCircle.setAttribute('r', topBarIsFixed ? getFinalRadius(viewportWidth, viewportHeight) : radius);
+                strokeCircle.style.opacity = topBarIsFixed ? 1 : 1 - Math.pow(transitionProgress, 3);
+
+                // 更新所有线条
+                updateLines(
+                    topBarIsFixed,
+                    viewportWidth,
+                    viewportHeight,
+                    centerX,
+                    displayedCenterY,
+                    topBarIsFixed ? getFinalRadius(viewportWidth, viewportHeight) : radius
+                );
+            }
+
+            // setTopBarFixed, scheduleRingUpdate, window.__ring 等保持不变
+
+            function setTopBarFixed(isFixed) {
+                topBarIsFixed = Boolean(isFixed);
+                if (!window.__pageLayout.isPaused()) {
+                    updateRing();
+                }
+            }
+
+            window.__ring = {
+                setTopBarFixed,
+            };
+
+            let ringFrame = null;
+
+            function scheduleRingUpdate() {
+                if (ringFrame !== null) return;
+                ringFrame = requestAnimationFrame(function() {
+                    if (!window.__pageLayout.isPaused()) {
+                        updateRing();
+                    }
+                    ringFrame = null;
+                });
+            }
+
+            window.__pageLayout.register(updateRing);
+            window.addEventListener('scroll', scheduleRingUpdate, { passive: true });
+            if (doc.readyState === 'loading') {
+                doc.addEventListener('DOMContentLoaded', scheduleRingUpdate);
+            } else {
+                scheduleRingUpdate();
+            }
+
+        })();
+    </script>
+    <script>
+        (function() {
+            'use strict';
+
+            // 控制顶栏标题的缩放、位移，以及 sticky 状态同步。
+            const hero = document.getElementById('hero');
+            const topBar = document.getElementById('topBar');
+            const topBarInner = topBar.querySelector('.top-bar-inner');
+            const topBarTitleGroup = document.getElementById('topBarTitleGroup');
+            const textPrimary = document.getElementById('textPrimary');
+            const textSecondary = document.getElementById('textSecondary');
+            const topBarBarrier = document.getElementById('topBarBarrier');
+            const themeToggle = document.getElementById('themeToggle');
+
+            // 可调参数集中放在这里，便于修改滚动过渡效果。
+            const config = {
+                textPrimaryBaseSize: 12,
+                textPrimaryMinSize: 2.8,
+                get heroHeight() {
+                    return hero.offsetHeight;
+                },
+            };
+
+            let scrollProgress = 0;
+            let isRafScheduled = false;
+            let adsorptionFrame = null;
+            let lastScrollActivity = performance.now();
+            let isAutoScrolling = false;
+            let hasCheckedPageMovement = false;
+            // 初始化滚动步长缓存
+            let topBarAdsorptionFastSpeed = null
+
+            // 进度从首屏居中状态过渡到顶栏左侧状态。
+            function updateTextStyles(progress) {
+                const p = Math.min(Math.max(progress, 0), 1);
+
+                const sizeRange = config.textPrimaryBaseSize - config.textPrimaryMinSize;
+                const currentSize = config.textPrimaryBaseSize - sizeRange * p;
+                textPrimary.style.fontSize = `${currentSize}rem`;
+
+                const groupStartLeft = topBarTitleGroup.offsetLeft;
+                const innerCenter = topBarInner.clientWidth / 2;
+                const primaryCenter = textPrimary.offsetLeft + textPrimary.offsetWidth / 2;
+                const initialTranslate = innerCenter - (groupStartLeft + primaryCenter);
+                const finalTranslate = -groupStartLeft;
+                const currentTranslate = initialTranslate * (1 - p) + finalTranslate * p;
+                topBarTitleGroup.style.transform = `translateX(${currentTranslate}px)`;
+
+                const innerRect = topBarInner.getBoundingClientRect();
+                const primaryRect = textPrimary.getBoundingClientRect();
+                const secondaryRect = textSecondary.getBoundingClientRect();
+                const barrierStart = primaryRect.left - innerRect.left;
+                const barrierEnd = secondaryRect.right - innerRect.left + window.innerWidth * 0.5;
+                const barrierLeft = barrierStart + (barrierEnd - barrierStart) * p;
+                topBarBarrier.style.left = `${barrierLeft}px`;
+            }
+
+            function updateTopBarStuckState() {
+                const rect = topBar.getBoundingClientRect();
+                const isStuck = rect.top <= 0 && window.scrollY >= hero.offsetHeight - 1;
+
+                if (isStuck) {
+                    topBar.classList.add('is-stuck');
+                } else {
+                    topBar.classList.remove('is-stuck');
+                }
+
+                updateRingForTopBarState(isStuck);
+            }
+
+            // 将根元素中的像素或视口高度单位转换为像素值。
+            function getRootLengthInPixels(propertyName) {
+                const value = window.getComputedStyle(document.documentElement)
+                    .getPropertyValue(propertyName).trim();
+                const match = value.match(/^([+-]?(?:\d+\.?\d*|\.\d+))\s*(px|vh)$/i);
+                if (!match) return 0;
+
+                const amount = Number.parseFloat(match[1]);
+                return match[2].toLowerCase() === 'vh' ?
+                    amount * window.innerHeight / 100 :
+                    amount;
+            }
+
+            // 读取顶栏吸附开始生效的最大距离。
+            function getTopBarAdsorptionDistance() {
+                return getRootLengthInPixels('--top-bar-adsorption');
+            }
+
+
+            // 将根元素中的秒或毫秒时间转换为毫秒值。
+            function getRootTimeInMilliseconds(propertyName) {
+                const value = window.getComputedStyle(document.documentElement)
+                    .getPropertyValue(propertyName).trim();
+                const match = value.match(/^([+]?(?:\d+\.?\d*|\.\d+))\s*(ms|s)$/i);
+                if (!match) return 0;
+
+                const amount = Number.parseFloat(match[1]);
+                return match[2].toLowerCase() === 's' ? amount * 1000 : amount;
+            }
+
+            // 根据总吸附距离和目标时长计算快速挡的每帧速度。
+            function getTopBarAdsorptionFastSpeed(distance) {
+                const duration = getRootTimeInMilliseconds('--top-bar-adsorption-fast-duration');
+                if (duration < 2) return 2;
+
+                return distance / (duration / 1000 * 60);
+            }
+
+            // 在页面静止后按剩余距离执行顶栏两挡速度吸附。
+            function runTopBarAdsorption() {
+                adsorptionFrame = null;
+
+                if (window.__pageLayout.isPaused()) return;
+
+                const distance = topBar.getBoundingClientRect().top;
+                const adsorptionDistance = getTopBarAdsorptionDistance();
+                if (distance <= 0 || distance > adsorptionDistance) {
+                    topBarAdsorptionFastSpeed = null
+                    return;
+                }
+
+                const scrollIdleDuration = performance.now() - lastScrollActivity;
+                if (scrollIdleDuration >= 100 && !hasCheckedPageMovement) {
+                    hasCheckedPageMovement = true;
+                }
+
+                if (scrollIdleDuration < 300) {
+                    adsorptionFrame = window.requestAnimationFrame(runTopBarAdsorption);
+                    return;
+                }
+
+                // 读取顶栏吸附切换到低速档的剩余距离。
+                const speedSwitch = getRootLengthInPixels('--top-bar-adsorption-speed-switch');
+                if (topBarAdsorptionFastSpeed === null) {
+                    topBarAdsorptionFastSpeed = getTopBarAdsorptionFastSpeed(distance);
+                }
+                let scrollStep;
+                if (distance > speedSwitch) {
+                    scrollStep = topBarAdsorptionFastSpeed;
+                } else if (distance <= 10) {
+                    scrollStep = 2
+                } else {
+                    scrollStep = topBarAdsorptionFastSpeed / 2;
+                }
+
+                isAutoScrolling = true;
+                window.scrollBy(0, scrollStep);
+                window.requestAnimationFrame(function() {
+                    isAutoScrolling = false;
+                });
+                adsorptionFrame = window.requestAnimationFrame(runTopBarAdsorption);
+                //console.log(distance, scrollStep)
+            }
+
+            // 调度顶栏吸附帧，并在暂停期间保持停止状态。
+            function scheduleTopBarAdsorption() {
+                if (window.__pageLayout.isPaused() || adsorptionFrame !== null) return;
+                adsorptionFrame = window.requestAnimationFrame(runTopBarAdsorption);
+            }
+
+            // 用户尝试滚动时立即取消当前吸附，并重新开始静止计时。
+            function interruptTopBarAdsorption() {
+                if (adsorptionFrame !== null) {
+                    window.cancelAnimationFrame(adsorptionFrame);
+                    adsorptionFrame = null;
+                }
+                isAutoScrolling = false;
+                hasCheckedPageMovement = false;
+                lastScrollActivity = performance.now();
+            }
+
+            function updateRingForTopBarState(isTopBarStuck) {
+                window.__ring?.setTopBarFixed(isTopBarStuck);
+            }
+
+            function performUpdate() {
+                if (window.__pageLayout.isPaused()) {
+                    isRafScheduled = false;
+                    return;
+                }
+
+                const scrollY = window.scrollY;
+                const heroH = config.heroHeight;
+
+                if (heroH > 0) {
+                    scrollProgress = scrollY / heroH;
+                } else {
+                    scrollProgress = 0;
+                }
+
+                updateTextStyles(scrollProgress);
+                updateTopBarStuckState();
+                scheduleTopBarAdsorption();
+                isRafScheduled = false;
+            }
+
+            // 用 requestAnimationFrame 合并同一帧内的滚动更新。
+            function handleScroll() {
+                if (window.__pageLayout.isPaused()) return;
+                if (!isAutoScrolling) lastScrollActivity = performance.now();
+                if (!isRafScheduled) {
+                    isRafScheduled = true;
+                    window.requestAnimationFrame(performUpdate);
+                }
+            }
+
+            function updateFrameworkLayout() {
+                performUpdate();
+            }
+
+            window.__pageLayout.register(updateFrameworkLayout);
+
+            let lastWidth = window.innerWidth;
+            let lastHeight = window.innerHeight;
+            let updateTimer = null;
+            const rootStyles = getComputedStyle(document.documentElement);
+            const breakpoint = parseInt(rootStyles.getPropertyValue('--wire-breakpoint'), 10) || 768;
+
+            function initialize() {
+                performUpdate();
+
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                window.addEventListener('wheel', interruptTopBarAdsorption, { passive: true });
+                window.addEventListener('touchstart', interruptTopBarAdsorption, { passive: true });
+                window.addEventListener('touchmove', interruptTopBarAdsorption, { passive: true });
+                window.addEventListener('keydown', function(event) {
+                    const scrollKeys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+                    if (scrollKeys.includes(event.key)) interruptTopBarAdsorption();
+                });
+                window.addEventListener('resize', function() {
+                    const newWidth = window.innerWidth;
+                    const newHeight = window.innerHeight;
+                    const widthChanged = newWidth !== lastWidth;
+                    const heightChanged = newHeight !== lastHeight;
+
+                    // 没有任何变化则直接返回
+                    if (!widthChanged && !heightChanged) return;
+
+                    // 以当前宽度判断移动端
+                    const isMobile = newWidth <= breakpoint;
+                    // 移动端：宽/高变化均不显示遮罩，只刷新布局
+                    if (isMobile) {
+                        clearTimeout(updateTimer);
+                        updateTimer = setTimeout(() => {
+                            window.__pageLayout.update(); // 直接更新，无遮罩
+                        }, 50); // 防抖延迟，防止高频触发
+                    } else {
+                        window.__pageLayout.pause(300);
+                    }
+
+                    // 更新记录值
+                    lastWidth = newWidth;
+                    lastHeight = newHeight;
+                }, { passive: true });
+
+                if (window.scrollY > 0) {
+                    handleScroll();
+                }
+
+                console.log('[框架] 初始化完成');
+                console.log('[框架] Hero 高度:', config.heroHeight, 'px');
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initialize);
+            } else {
+                initialize();
+            }
+
+            // 保留调试接口，便于检查滚动进度和顶栏状态。
+            window.__framework = {
+                config: config,
+                getScrollProgress: () => scrollProgress,
+                updateTextStyles: updateTextStyles,
+                updateTopBarStuckState: updateTopBarStuckState,
+                elements: {
+                    hero,
+                    topBar,
+                    textPrimary,
+                    textSecondary,
+                },
+            };
+
+        })();
+    </script>
+    <script>
+        (function() {
+            'use strict';
+
+            const capacityList = document.getElementById('capacity-list');
+            const lore = document.getElementById('capacity-lore-for-pc');
+
+            if (!capacityList || !lore) return;
+
+            const desktopQuery = window.matchMedia('(min-width: 769px)');
+            let clearTimer = null;
+
+            function clearLore() {
+                lore.classList.remove('is-visible');
+                clearTimeout(clearTimer);
+                clearTimer = setTimeout(function() {
+                    lore.classList.remove('card-desc');
+                    lore.textContent = '';
+                }, 350);
+            }
+
+            function showLore(card) {
+                clearTimeout(clearTimer);
+
+                const description = card.querySelector('.card-desc');
+                if (!description) return;
+
+                lore.classList.add('card-desc');
+                lore.innerHTML = description.innerHTML;
+                lore.classList.add('is-visible');
+            }
+
+            function bindDesktopHover() {
+                capacityList.querySelectorAll('.capacity-card').forEach(function(card) {
+                    card.addEventListener('mouseenter', function() {
+                        if (desktopQuery.matches) showLore(card);
+                    });
+                    card.addEventListener('mouseleave', function() {
+                        if (desktopQuery.matches) clearLore();
+                    });
+                });
+            }
+
+            desktopQuery.addEventListener('change', function(event) {
+                if (!event.matches) clearLore();
+            });
+
+            bindDesktopHover();
+        }());
+    </script>
+</body>
+</html>

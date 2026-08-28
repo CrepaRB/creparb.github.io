@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="CrepaRB">
+    <meta name="author" content="DeepSeek">
+    <meta name="author" content="ChatGPT">
+    <meta name="description" content="一份简历，属于网名岑鸽的人类。">
+    <title>何人的简历</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>history.scrollRestoration = "manual";window.scrollTo(0, 0)</script>
+</head>
+
+<body>
+
+    <!-- 固定背景：深度线框、环形效果和首屏装饰。 -->
+    <div class="background-layer" id="backgroundLayer" aria-hidden="true">
+        <!-- 动态生成的深度线框挂载点。 -->
+        <div id="wire-layer" class="wire-layer"></div>
+
+        <!-- 环形模糊层使用的 SVG 遮罩。 -->
+        <svg width="0" height="0" style="position: absolute;">
+            <defs>
+                <mask id="ring-mask">
+                    <rect x="0" y="0" width="100%" height="100%" fill="black"></rect>
+                    <circle id="mask-circle" cx="0" cy="0" r="0" fill="white"></circle>
+                    <rect id="mask-rect" x="0" y="0" width="0" height="0" fill="white"></rect>
+                </mask>
+            </defs>
+        </svg>
+
+        <!-- 由 SVG 遮罩限定范围的环形模糊。 -->
+        <div class="ring-overlay" role="presentation"></div>
+
+        <!-- 与模糊层共享几何参数的环形描边+直线装饰。 -->
+        <div class="ring-stroke">
+            <svg id="ring-stroke-svg" width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+                <circle id="ring-stroke-circle" cx="0" cy="0" r="0" fill="none" stroke="var(--ring-stroke-color)" stroke-width="var(--ring-stroke-width)" vector-effect="non-scaling-stroke" />
+                <line id="line-left" class="decoration-line" x1="0" y1="0" x2="0" y2="0" stroke="var(--ring-stroke-color)" stroke-width="var(--ring-stroke-width)" stroke-linecap="round" />
+                <line id="line-right" class="decoration-line" x1="0" y1="0" x2="0" y2="0" stroke="var(--ring-stroke-color)" stroke-width="var(--ring-stroke-width)" stroke-linecap="round" />
+                <line id="subline-left" class="decoration-line" x1="0" y1="0" x2="0" y2="0" stroke="var(--ring-stroke-color)" stroke-width="var(--ring-stroke-width)" stroke-linecap="round" />
+                <line id="subline-right" class="decoration-line" x1="0" y1="0" x2="0" y2="0" stroke="var(--ring-stroke-color)" stroke-width="var(--ring-stroke-width)" stroke-linecap="round" />
+            </svg>
+        </div>
+
+        <!-- 由 JavaScript 克隆并定位到各深度层的模板。 -->
+        <template id="wire-template">
+            <svg class="depth-wire-frame" viewBox="0 0 875 875">
+                <rect class="st0" x="0" y="0" width="875" height="875"></rect>
+                <line class="st0" x1="0" y1="175" x2="875" y2="175"></line>
+                <line class="st0" x1="0" y1="350" x2="875" y2="350"></line>
+                <line class="st0" x1="0" y1="525" x2="875" y2="525"></line>
+                <line class="st0" x1="0" y1="700" x2="875" y2="700"></line>
+                <line class="st0" x1="175" y1="0" x2="175" y2="875"></line>
+                <line class="st0" x1="350" y1="0" x2="350" y2="875"></line>
+                <line class="st0" x1="525" y1="0" x2="525" y2="875"></line>
+                <line class="st0" x1="700" y1="0" x2="700" y2="875"></line>
+            </svg>
+        </template>
+
+        <!-- 首屏装饰。 -->
+    <section class="hero" id="hero">
+        <div class="hero-title"><i class="fa-solid fa-arrow-up-long"></i></div>
+        <div class="hero-decoration" aria-hidden="true">
+            <span class="hero-decoration-text">Welcome</span>
+        </div>
+    </section>
+    </div>
+
+    <!-- 窗口尺寸变化时暂停渲染的过渡遮罩。 -->
+    <div id="pause-screen" class="pause-screen" hidden aria-live="polite">
+        <div><i class="fa-solid fa-hourglass"></i><p style="display:inline">等待页面稳定</p></div>
+    </div>
+
+    <!-- 页面内容层，位于固定背景之上。 -->
+    <div class="page-wrapper">
+
+        <!-- 滚动后固定的顶栏。 -->
+        <header class="top-bar" id="topBar">
+            <div class="top-bar-inner">
+                <div class="top-bar-title-group" id="topBarTitleGroup">
+                    <!-- 主标题由 JS 缩放，标题组负责整体移动。 -->
+                    <span class="top-bar-text top-bar-text-primary" id="textPrimary">About 岑鸽&nbsp;</span>
+                    <!-- 始终贴在主标题右侧的副标题。 -->
+                    <pre class="top-bar-text top-bar-text-secondary" id="textSecondary">（当然不是本名）</pre>
+                </div>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换到夜间模式" aria-pressed="false">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <span class="top-bar-barrier" id="topBarBarrier" aria-hidden="true"></span>
+            </div>
+        </header>
+
+        <!-- 简历正文。 -->
+        <main class="content" id="mainContent">
+            <noscript>
+                <br />
+                <div class="card">
+                    <hr>
+                    <p class="drop-cap">衷心希望您能够使用支持JavaScript的浏览器访问此页面，亦不要通过禁用JavaScript阻止本页面正常运作。</p>
+                    <hr>
+                </div>
+            </noscript>
+
+            <h2>关于我……</h2><div class="tag-list">
+            <h3 style="display:inline" class="card">完美主义</h3><h3 style="display:inline" class="card">数学苦手</h3><h3 style="display:inline" class="card">兴趣优先</h3><h3 style="display:inline" class="card">乐于创作</h3><h3 style="display:inline" class="card">温柔可爱……？</h3>
+            </div>
+
+            <h3>联系方式</h3>
+            <p class="card">大多数平台，不叫岑鸽就叫CrepaRB<br /></p>
+
+            <h3>教育经历</h3>
+            <div class="card">
+                <p>2023.09 - 2026.06<br />就读于哈尔滨市一所市重点高中 选科物化生。<br />
+                <p>2026.09 - <br />即将就读于东北农业大学生命科学学院 生物科学专业。</p>
+                <p>只是一位平平无奇的学生</p>
+            </div>
+            </pre>
+
+            <h3>技术能力</h3>
+            <div class="card">
+                <div id="capacity-list" class="capacity-list">
+                <div class="capacity-card" data-progress="html">
+                    <div class="card-content"><div class="card-icon"><i class="fab fa-html5"></i></div><div class="card-info"><div class="card-title"><h4>HTML / CSS</h4><span>~90%</span></div><div class="progress-track"><div class="progress-fill" style="width:90%"></div></div></div></div>
+                    <div class="card-desc-wrapper"><div class="card-desc">了解网页需要包含的内容要素，能够编写较复杂页面，能够独立维护复杂的大型样式表。</div></div>
+                </div>
+                <div class="capacity-card" data-progress="js">
+                    <div class="card-content"><div class="card-icon"><i class="fab fa-js"></i></div><div class="card-info"><div class="card-title"><h4>JavaScript</h4><span>~60%</span></div><div class="progress-track"><div class="progress-fill" style="width:60%"></div></div></div></div>
+                    <div class="card-desc-wrapper"><div class="card-desc">正在学习 DOM 与交互开发，能够制作响应式、可交互的精美静态网页。<br />能够构建简单的脚本，能够自行对复杂脚本进行简单修改。</div></div>
+                </div>
+                <div class="capacity-card" data-progress="devops">
+                    <div class="card-content"><div class="card-icon"><i class="fas fa-server"></i></div><div class="card-info"><div class="card-title"><h4>设备运维</h4><span>~30%</span></div><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div></div></div>
+                    <div class="card-desc-wrapper"><div class="card-desc">符合微软初级用户的定义（），小学到初中到高中一直在协助老师管理电子教学白板。<br />（Wait，这种程度的工作真的算运维么？）</div></div>
+                </div>
+                <div class="capacity-card" data-progress="python">
+                    <div class="card-content"><div class="card-icon"><i class="fab fa-python"></i></div><div class="card-info"><div class="card-title"><h4>Python</h4><span>~10%</span></div><div class="progress-track"><div class="progress-fill" style="width:10%"></div></div></div></div>
+                    <div class="card-desc-wrapper"><div class="card-desc">熟悉基础语法与环境管理，对于正式的开发流程较为生疏。</div></div>
+                </div>
+            </div>
+                    <div id="capacity-lore-for-pc" class="capacity-lore-for-pc"></div>
+            </div>
+
+            <h3>常用工具</h3>
+            <div class="tools-list">
+                <span class="tool-tag"><i class="fab fa-git-alt"></i> Git</span>
+                <span class="tool-tag"><i class="fab fa-linux"></i> Linux</span>
+                <span class="tool-tag"><i class="fas fa-code"></i> VS Code</span>
+                <span class="tool-tag"><i class="fas fa-robot"></i> AI 辅助</span>
+            </div>
+
+            <h3>兴趣爱好</h3>
+            <p class="card">除去计算机相关的之外，唱歌画画之类，都感一点点兴趣，也都没有达到精通的程度</p>
+
+            <hr>
+            <h2>关于此页</h2>
+            <div class="card">
+                <p class="drop-cap">此页面包含如下设计：<br /><br /></p>
+                <ul>
+                <li>具有视差效果、入场动画的简约线框，可通过类注册表设计迅速配置。</li>
+                <li>精心设计运动规律，营造扩散入场效果的模糊背景。</li>
+                <li>动态样式、自动向上吸附的顶栏。</li>
+                <li>完善的日夜间模式切换。</li>
+                <li>完善的变量控制——线框表现细节、背景模糊强度、顶栏吸附行为细节、大部分配色……种种细节均由CSS内的根变量控制。</li>
+                <li>微交互设计，保证鲜活的浏览体验。</li>
+                <li>响应式布局，适配不同屏幕尺寸，部分元素在不同布局中有截然不同的表现。</li>
+                <li>背景线框装饰对移动端与桌面端采用不同编组，发生切换时顺利重绘。</li>
+                <li>优雅的优化设计，调整页面大小时自动暂停一切由JS驱动的动态内容，降低性能负担。</li>
+                <br />
+                </ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            © 2026 CrepaRB. All Rights Reserved.<br />
+            Source code is licensed under <a href="/LICENSE">GNU GPL v3.0</a>.
+        </footer>
+
+    </div>
+
+    <!-- 背景和布局脚本按依赖顺序加载。 -->
+    <script src="js/page-control.js"></script>
+    <script src="js/background-decoration-move.js"></script>
+    <script src="js/body-decoration-move.js"></script>
+    <script src="js/framework.js"></script>
+    <script src="js/capacity-card-swich.js"></script>
+</body>
+</html>
