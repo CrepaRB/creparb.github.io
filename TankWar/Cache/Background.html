@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>稳定背景 · 岑鸽</title>
+    <style>
+        /* ===== CSS 变量（与原页面一致） ===== */
+        :root {
+            /* 浅色主题 */
+            --light-color-bg-default: #EEF;
+            --light-color-text-primary: #3B526B;
+            --light-color-text-secondary: #6B869E;
+            --light-color-bg-topbar: #E8F0FE;
+            --light-color-bg-topbar-t: #E8F0FE00;
+            --light-pause-transition-color: #FFF;
+            --light-pause-background-color: #EEF;
+
+            /* 深色主题 */
+            --dark-color-bg-default: #000005;
+            --dark-color-text-primary: #95c0e5;
+            --dark-color-text-secondary: #7896b3;
+            --dark-color-bg-topbar: #1a1a1a;
+            --dark-color-bg-topbar-t: #1a1a1a00;
+            --dark-pause-transition-color: #000;
+            --dark-pause-background-color: #000005;
+
+            /* 装饰颜色 */
+            --color-accent: #006ED356;
+            --color-border: #004A9437;
+            --ring-stroke-color: #006ED356;
+            --ring-fill-color: #0084ff0A;
+            --ring-blur: 4px;
+            --ring-stroke-width: 3px;
+
+            /* 线框深度参数 */
+            --wire-pc-depth-zero-scale: 0.5;
+            --wire-pc-depth-zero-color: #006ED356;
+            --wire-pc-depth-zero-line-width: 10px;
+            --max-depth: 20;
+
+            /* 尺寸 */
+            --decoration-size: clamp(180px, 25vw, 360px);
+
+            /* 断点 */
+            --wire-breakpoint: 768px;
+        }
+
+        /* ===== 主题应用 ===== */
+        @media (prefers-color-scheme: light) {
+            body {
+                --color-bg-default: var(--light-color-bg-default);
+                --color-text-primary: var(--light-color-text-primary);
+                --color-text-secondary: var(--light-color-text-secondary);
+                --pause-background-color: var(--light-pause-background-color);
+                --ring-stroke-color: #006ED356;
+                --ring-fill-color: #0084ff0A;
+                --wire-pc-depth-zero-color: #006ED356;
+            }
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                --color-bg-default: var(--dark-color-bg-default);
+                --color-text-primary: var(--dark-color-text-primary);
+                --color-text-secondary: var(--dark-color-text-secondary);
+                --pause-background-color: var(--dark-pause-background-color);
+                --ring-stroke-color: #95c0e580;
+                --ring-fill-color: #95c0e50A;
+                --wire-pc-depth-zero-color: #95c0e580;
+            }
+        }
+
+        /* ===== 全局重置 ===== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--color-bg-default);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== 背景层 ===== */
+        .background-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-color: var(--color-bg-default);
+            pointer-events: none;
+            overflow: visible;
+            transition: background-color 0.3s ease;
+        }
+
+        /* ===== 线框容器 ===== */
+        .wire-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ===== 单个线框 SVG ===== */
+        .depth-wire-frame {
+            position: absolute;
+            overflow: visible;
+            pointer-events: none;
+        }
+        .depth-wire-frame .st0 {
+            fill: none;
+            stroke: var(--wire-pc-depth-zero-color);
+            stroke-width: var(--wire-pc-depth-zero-line-width);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ===== 线框位置 & 深度样式 ===== */
+        /* 深度 0 — 最大最亮 */
+        .wire-d0 {
+            width: 50vw;
+            height: 50vw;
+            left: -5vw;
+            top: 10vh;
+            filter: brightness(100%);
+            z-index: 100;
+            opacity: 0.9;
+        }
+        /* 深度 2 */
+        .wire-d2 {
+            width: 40.3vw;
+            height: 40.3vw;
+            left: 59.85vw;
+            top: 5vh;
+            filter: brightness(88%);
+            z-index: 98;
+            opacity: 0.85;
+        }
+        /* 深度 5 */
+        .wire-d5 {
+            width: 31.25vw;
+            height: 31.25vw;
+            left: 34.375vw;
+            top: 42vh;
+            filter: brightness(70%);
+            z-index: 95;
+            opacity: 0.75;
+        }
+        /* 深度 3 */
+        .wire-d3 {
+            width: 36.75vw;
+            height: 36.75vw;
+            left: 71.625vw;
+            top: 62vh;
+            filter: brightness(82%);
+            z-index: 97;
+            opacity: 0.80;
+        }
+        /* 深度 7 */
+        .wire-d7 {
+            width: 27.15vw;
+            height: 27.15vw;
+            left: 1.425vw;
+            top: 55vh;
+            filter: brightness(58%);
+            z-index: 93;
+            opacity: 0.65;
+        }
+        /* 深度 10 */
+        .wire-d10 {
+            width: 22.75vw;
+            height: 22.75vw;
+            left: 28.625vw;
+            top: 78vh;
+            filter: brightness(40%);
+            z-index: 90;
+            opacity: 0.50;
+        }
+        /* 深度 4 — 额外一个，丰富层次 */
+        .wire-d4 {
+            width: 33.6vw;
+            height: 33.6vw;
+            left: 52vw;
+            top: 25vh;
+            filter: brightness(76%);
+            z-index: 96;
+            opacity: 0.78;
+        }
+
+        /* ===== 环形遮罩（模糊） ===== */
+        .ring-overlay {
+            position: fixed;
+            inset: 0;
+            display: block;
+            pointer-events: none;
+            z-index: 2;
+            -webkit-backdrop-filter: blur(var(--ring-blur));
+            backdrop-filter: blur(var(--ring-blur));
+            -webkit-mask: url(#ring-mask);
+            mask: url(#ring-mask);
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+        }
+
+        /* ===== 环形描边 ===== */
+        .ring-stroke {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 3;
+        }
+        .ring-stroke svg {
+            position: absolute;
+            overflow: visible;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+        }
+        .ring-stroke svg circle {
+            fill: var(--ring-fill-color);
+            transition: fill 0.3s ease;
+        }
+        .ring-stroke svg .decoration-line {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        /* ===== 页面内容（仅用于展示） ===== */
+        .content {
+            position: relative;
+            z-index: 5;
+            padding: 2rem;
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--color-text-primary);
+            transition: color 0.3s ease;
+            pointer-events: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .content h1 {
+            font-size: clamp(2rem, 6vw, 3.6rem);
+            font-weight: 300;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-primary);
+            -webkit-text-stroke: 2px var(--color-text-secondary);
+            -webkit-text-stroke-color: var(--color-text-secondary);
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+        }
+        .content p {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-top: 0.25rem;
+            color: var(--color-text-secondary);
+        }
+        .content .badge {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid var(--color-border);
+            border-radius: 40px;
+            font-size: 0.75rem;
+            letter-spacing: 0.04em;
+            color: var(--color-text-secondary);
+            background: var(--ring-fill-color);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .wire-d0 {
+                width: 70vw;
+                height: 70vw;
+                left: -10vw;
+                top: 5vh;
+            }
+            .wire-d2 {
+                width: 56vw;
+                height: 56vw;
+                left: 44vw;
+                top: 2vh;
+            }
+            .wire-d5 {
+                width: 44vw;
+                height: 44vw;
+                left: 28vw;
+                top: 38vh;
+            }
+            .wire-d3 {
+                width: 50vw;
+                height: 50vw;
+                left: 55vw;
+                top: 55vh;
+            }
+            .wire-d7 {
+                width: 38vw;
+                height: 38vw;
+                left: 2vw;
+                top: 48vh;
+            }
+            .wire-d10 {
+                width: 32vw;
+                height: 32vw;
+                left: 20vw;
+                top: 70vh;
+            }
+            .wire-d4 {
+                width: 46vw;
+                height: 46vw;
+                left: 40vw;
+                top: 20vh;
+            }
+            .content h1 {
+                font-size: clamp(1.6rem, 8vw, 2.6rem);
+            }
+        }
+        @media (max-width: 480px) {
+            .wire-d0 {
+                width: 90vw;
+                height: 90vw;
+                left: -15vw;
+                top: 2vh;
+            }
+            .wire-d2 {
+                width: 72vw;
+                height: 72vw;
+                left: 36vw;
+                top: 0vh;
+            }
+            .wire-d5 {
+                width: 56vw;
+                height: 56vw;
+                left: 22vw;
+                top: 32vh;
+            }
+            .wire-d3 {
+                width: 64vw;
+                height: 64vw;
+                left: 44vw;
+                top: 48vh;
+            }
+            .wire-d7 {
+                width: 48vw;
+                height: 48vw;
+                left: 0vw;
+                top: 42vh;
+            }
+            .wire-d10 {
+                width: 40vw;
+                height: 40vw;
+                left: 14vw;
+                top: 62vh;
+            }
+            .wire-d4 {
+                width: 58vw;
+                height: 58vw;
+                left: 32vw;
+                top: 16vh;
+            }
+        }
+
+        /* ===== 页脚 ===== */
+        .footer {
+            position: relative;
+            z-index: 5;
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            font-size: 0.6rem;
+            color: var(--color-text-secondary);
+            opacity: 0.4;
+            pointer-events: auto;
+            margin-top: auto;
+        }
+        .footer a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px dotted currentColor;
+        }
+        .footer a:hover {
+            opacity: 0.8;
+        }
+
+        /* ===== 工具类 ===== */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* 遮罩 SVG 定义（内联） */
+        .mask-defs {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 背景层 ===== -->
+    <div class="background-layer" aria-hidden="true">
+
+        <!-- ===== 线框层 ===== -->
+        <div class="wire-layer">
+
+            <!-- 线框 1 · 深度 0 -->
+            <svg class="depth-wire-frame wire-d0" viewBox="0 0 875 875">
+                <rect class="st0" x="0" y="0" width="875" height="875" />
+                <line class="st0" x1="0" y1="175" x2="875" y2="175" />
+                <line class="st0" x1="0" y1="350" x2="875" y2="350" />
+                <line class="st0" x1="0" y1="525" x2="875" y2="525" />
+                <line class="st0" x1="0" y1="700" x2="875" y2="700" />
+                <line class="st0" x1="175" y1="0" x2="175" y2="875" />
+                <line class="st0" x1="350" y1="0" x2="350" y2="875" />
+                <line class="st0" x1="525" y1="0" x2="525" y2="875" />
+                <line class="st0" x1="700" y1="0" x2="700" y2="875" />
+            </svg>
+
+            <!-- 线框 2 · 深度 2 -->
+            <svg class="depth-wire-frame wire-d2" viewBox="0 0 875 875">
+                <rect class="st0" x="0" y="0" width="875" height="875" />
+                <line class="st0" x1="0" y1="175" x2="875" y2="175" />
+                <line class="st0" x1="0" y1="350" x2="875" y2="350" />
+                <line class="st0" x1="0" y1="525" x2="875" y2="525" />
+                <line class="st0" x1="0" y1="700" x2="875" y2="700" />
+                <line class="st0" x1="175" y1="0" x2="175" y2="875" />
+                <line class="st0" x1="350" y1="0" x2="350" y2="875" />
+                <line class="st0" x1="525" y1="0" x2="525" y2="875" />
+                <line class="st0" x1="700" y1="0" x2="700" y2="875" />
+            </svg>
+
+            <!-- 线框 3 · 深度 5 -->
+            <svg class="depth-wire-frame wire-d5" viewBox="0 0 875 875">
+                <rect class="st0" x="0" y="0" width="875" height="875" />
+                <line class="st0" x1="0" y1="175" x2="875" y2="175" />
+                <line class="st0" x1="0" y1="350" x2="875" y2="350" />
+                <line class="st0" x1="0" y1="525" x2="875" y2="525" />
+                <line class="st0" x1="0" y1="700" x2="875" y2="700" />
+                <line class="st0" x1="175" y1="0" x2="175" y2="875" />
+                <line class="st0" x1="350" y1="0" x2="350" y2="875" />
+                <line class="st0" x1="525" y1="0" x2="525" y2="875" />
+                <line class="st0" x1="700" y1="0" x2="700" y2="875" />
+            </svg>
+
+            <!-- 线框 4 · 深度 3 -->
+            <svg class="depth-wire-frame wire-d3" viewBox="0 0 875 875">
+                <rect class="st0" x="0" y="0" width="875" height="875" />
+                <line class="st0" x1="0" y1="175" x2="875" y2="175" />
+                <line class="st0" x1="0" y1="350" x2="875" y2="350" />
+                <line class="st0" x1="0" y1="525" x2="875" y2="525" />
+                <line class="st0" x1="0" y1="700" x2="875" y2="700" />
+                <line class="st0" x1="175" y1="0" x2="175" y2="875" />
+                <line class="st0" x1="350" y1="0" x2="350" y2="875" />
+                <line class="st0" x1="525" y1="0" x2="525" y2="875" />
+                <line class="st0" x1="700" y1="0" x2="700" y2="875" />
+            </svg>
+
+            <!-- 线框 5 · 深度 7 -->
+            <svg class="depth-wire-frame wire-d7" viewBox="0 0 875 875">
+                <rect class="st0" x="0" y="0" width="875" height="875" />
+                <line class="st0" x1="0" y1="175" x2="875" y2="175" />
+                <line class="st0" x1="0" y1="350" x2="875" y2="350" />
+                <line class="st0" x1="0" y1="525" x2="875" y2="525" />
+                <line class="st0" x1="0" y1="700" x2="875" y2="700" />
+                <line class="st0" x1="175" y1="0" x2="175" y2="875" />
+                <line class="st0" x1="350" y1="0" x2="350" y2="875" />
+                <line class="st0" x1="525" y1="0" x2="525" y2="875" />
+                <line class="st0" x1="700" y1="0" x2="700" y2="875" />
+            </svg>
+
+            <!-- 线框 6 · 深度 10 -->
+            <svg class="depth-wire-frame wire-d10" viewBox="0 0 875 875">
+                <rect class="st0" x="0" y="0" width="875" height="875" />
+                <line class="st0" x1="0" y1="175" x2="875" y2="175" />
+                <line class="st0" x1="0" y1="350" x2="875" y2="350" />
+                <line class="st0" x1="0" y1="525" x2="875" y2="525" />
+                <line class="st0" x1="0" y1="700" x2="875" y2="700" />
+                <line class="st0" x1="175" y1="0" x2="175" y2="875" />
+                <line class="st0" x1="350" y1="0" x2="350" y2="875" />
+                <line class="st0" x1="525" y1="0" x2="525" y2="875" />
+                <line class="st0" x1="700" y1="0" x2="700" y2="875" />
+            </svg>
+
+            <!-- 线框 7 · 深度 4（额外层次） -->
+            <svg class="depth-wire-frame wire-d4" viewBox="0 0 875 875">
+                <rect class="st0" x="0" y="0" width="875" height="875" />
+                <line class="st0" x1="0" y1="175" x2="875" y2="175" />
+                <line class="st0" x1="0" y1="350" x2="875" y2="350" />
+                <line class="st0" x1="0" y1="525" x2="875" y2="525" />
+                <line class="st0" x1="0" y1="700" x2="875" y2="700" />
+                <line class="st0" x1="175" y1="0" x2="175" y2="875" />
+                <line class="st0" x1="350" y1="0" x2="350" y2="875" />
+                <line class="st0" x1="525" y1="0" x2="525" y2="875" />
+                <line class="st0" x1="700" y1="0" x2="700" y2="875" />
+            </svg>
+
+        </div><!-- /wire-layer -->
+
+        <!-- ===== 遮罩定义（供 ring-overlay 使用） ===== -->
+        <svg class="mask-defs" width="0" height="0" aria-hidden="true">
+            <defs>
+                <mask id="ring-mask">
+                    <rect x="0" y="0" width="100%" height="100%" fill="black" />
+                    <circle cx="50vw" cy="calc(100vh - 33vh)" r="min(50vw, 60vh)" fill="white" />
+                    <rect x="calc(50vw - min(50vw, 60vh))" y="calc(100vh - 33vh)" width="calc(2 * min(50vw, 60vh))" height="33vh" fill="white" />
+                </mask>
+            </defs>
+        </svg>
+
+        <!-- ===== 环形模糊遮罩 ===== -->
+        <div class="ring-overlay" role="presentation"></div>
+
+        <!-- ===== 环形描边 & 装饰线 ===== -->
+        <div class="ring-stroke">
+            <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
+                <circle cx="500" cy="500" r="300"
+                fill="var(--ring-fill-color)"
+                stroke="var(--ring-stroke-color)"
+                stroke-width="var(--ring-stroke-width)"
+                vector-effect="non-scaling-stroke" />
+                <!-- 左侧主线 -->
+                <line class="decoration-line"
+                x1="0" y1="500" x2="500" y2="500"
+                stroke="var(--ring-stroke-color)"
+                stroke-width="var(--ring-stroke-width)"
+                stroke-linecap="round" />
+                <!-- 右侧主线 -->
+                <line class="decoration-line"
+                x1="500" y1="500" x2="1000" y2="500"
+                stroke="var(--ring-stroke-color)"
+                stroke-width="var(--ring-stroke-width)"
+                stroke-linecap="round" />
+                <!-- 左侧副线（向下延伸） -->
+                <line class="decoration-line"
+                x1="200" y1="800" x2="1000" y2="850"
+                stroke="var(--ring-stroke-color)"
+                stroke-width="var(--ring-stroke-width)"
+                stroke-linecap="round" />
+                <!-- 右侧副线（向下延伸） -->
+                <line class="decoration-line"
+                x1="800" y1="800" x2="0" y2="850"
+                stroke="var(--ring-stroke-color)"
+                stroke-width="var(--ring-stroke-width)"
+                stroke-linecap="round" />
+            </svg>
+        </div>
+
+    </div><!-- /background-layer -->
+
+    <footer class="footer">
+        © 2026 CrepaRB &middot; 背景样式提取自 <a href="#" target="_blank">altogether.html</a>
+    </footer>
+
+</body>
+</html>
