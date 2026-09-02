@@ -1,48 +1,51 @@
 (function() {
     'use strict';
 
-    const capacityList = document.getElementById('capacity-list');
-    const lore = document.getElementById('capacity-lore-for-pc');
-
-    if (!capacityList || !lore) return;
-
     const desktopQuery = window.matchMedia('(min-width: 769px)');
-    let clearTimer = null;
+    const capacityLists = document.querySelectorAll('.capacity-list');
 
-    function clearLore() {
-        lore.classList.remove('is-visible');
-        clearTimeout(clearTimer);
-        clearTimer = setTimeout(function() {
-            lore.classList.remove('card-desc');
-            lore.textContent = '';
-        }, 350);
-    }
+    capacityLists.forEach(function(capacityList) {
+        const lore = capacityList.nextElementSibling?.classList.contains('capacity-lore-for-pc')
+            ? capacityList.nextElementSibling
+            : null;
+        const capacityCard = capacityList.parentElement;
 
-    function showLore(card) {
-        clearTimeout(clearTimer);
+        if (!lore || !capacityCard) return;
 
-        const description = card.querySelector('.card-desc');
-        if (!description) return;
+        let clearTimer = null;
 
-        lore.classList.add('card-desc');
-        lore.innerHTML = description.innerHTML;
-        lore.classList.add('is-visible');
-    }
+        function clearLore() {
+            lore.classList.remove('is-visible');
+            clearTimeout(clearTimer);
+            clearTimer = setTimeout(function() {
+                lore.classList.remove('card-desc');
+                lore.textContent = '';
+            }, 350);
+        }
 
-    function bindDesktopHover() {
+        function showLore(card) {
+            clearTimeout(clearTimer);
+
+            const description = card.querySelector('.card-desc');
+            if (!description) return;
+
+            lore.classList.add('card-desc');
+            lore.innerHTML = description.innerHTML;
+            lore.classList.add('is-visible');
+        }
+
         capacityList.querySelectorAll('.capacity-card').forEach(function(card) {
             card.addEventListener('mouseenter', function() {
                 if (desktopQuery.matches) showLore(card);
             });
-            card.addEventListener('mouseleave', function() {
-                if (desktopQuery.matches) clearLore();
-            });
         });
-    }
 
-    desktopQuery.addEventListener('change', function(event) {
-        if (!event.matches) clearLore();
+        capacityCard.addEventListener('mouseleave', function() {
+            if (desktopQuery.matches) clearLore();
+        });
+
+        desktopQuery.addEventListener('change', function(event) {
+            if (!event.matches) clearLore();
+        });
     });
-
-    bindDesktopHover();
 }());
