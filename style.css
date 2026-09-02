@@ -1,4 +1,4 @@
-﻿/* 设计令牌：颜色、间距、字体和背景动画参数。 */
+/* 设计令牌：颜色、间距、字体和背景动画参数。 */
         :root {
             --light-color-bg-default: #EEF;
             --light-color-text-primary: #3B526B;
@@ -476,7 +476,6 @@
             font-size: 1.15rem;
             font-weight: 500;
             color: var(--color-text-secondary);
-            margin: 24px 0 12px;
         }
 
         #mainContent h4 {
@@ -484,6 +483,16 @@
             font-weight: 500;
             color: var(--color-text-primary);
             margin: 0;
+        }
+
+        #mainContent ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin: 12px 0;
+        }
+        #mainContent li {
+            color: var(--color-text-secondary);
+            font-size: 0.85rem
         }
 
         #mainContent p,
@@ -600,7 +609,7 @@
             padding: 10px;
         }
 
-        #mainContent .tag-list >* {display: inline-flex;white-space: nowrap;text-align: center;}
+        #mainContent .tag-list >* {display: inline-flex; white-space: nowrap; text-align: center;margin: none; }
 
         #mainContent .capacity-card:hover .card-icon { background-color: var(--color-border); transform: scale(1.02); }
         #mainContent .card-icon i { display: block; line-height: 1; }
@@ -611,8 +620,18 @@
         #mainContent .capacity-card:hover .progress-fill { filter: brightness(1.6); }
         #mainContent .card-desc-wrapper { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.35s ease, margin 0.35s ease; margin-top: 0; }
         #mainContent .card-desc { font-size: 0.88rem; line-height: 1.55; color: var(--color-text-secondary); padding-top: 10px; border-top: 1px dashed var(--color-text-secondary); margin-top: 2px; }
-        #mainContent .capacity-lore-for-pc { opacity: 0; transition: 0.35s ease; }
-        #mainContent .capacity-lore-for-pc.is-visible { opacity: 1; }
+        #mainContent .capacity-lore-for-pc {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            margin-top: 0;
+            transition: max-height 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.35s ease, margin 0.35s ease;
+        }
+        #mainContent .capacity-lore-for-pc.is-visible {
+            max-height: 2000px;
+            opacity: 1;
+            margin-top: 6px;
+        }
         #mainContent .tools-list { display: flex; flex-wrap: wrap; gap: 10px 12px; margin: 4px 0 12px; }
         #mainContent .tool-tag { display: inline-flex; align-items: center; gap: 6px; background-color: var(--content-card-bg); padding: 5px 14px 5px 12px; border-radius: 20px; font-size: 0.82rem; color: var(--color-text-secondary); transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02); border: 1px solid rgba(169, 206, 240, 0.2); }
         #mainContent .tool-tag i { font-size: 0.9rem; color: var(--content-strong-color); width: 1.1em; text-align: center; }
@@ -650,7 +669,16 @@
             #mainContent .card-icon { flex-basis: 42px; width: 42px; height: 42px; font-size: 18px; border-radius: 8px; }
             #mainContent .card-desc { font-size: 0.82rem; }
             #mainContent .tool-tag { font-size: 0.75rem; padding: 4px 12px 4px 10px; }
-            #mainContent .capacity-card:hover .card-desc-wrapper { max-height: 180px; opacity: 1; margin-top: 6px; }
+            #mainContent .capacity-card:hover .card-desc-wrapper {
+                max-height: 2000px;
+                opacity: 1;
+                margin-top: 6px;
+            }
+            #mainContent .card-desc,
+            #mainContent .card-desc li {
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
         }
 
         @media (min-width: 1200px) {
